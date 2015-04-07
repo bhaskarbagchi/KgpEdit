@@ -63,7 +63,7 @@ public:
 
     // Client participant pane add participant functions
 
-    void newParticipant(QString name, QString address, QString permissions = "waiting");
+    void newParticipant(QString name, QString address, QString permissions = "write");
 
     // For when we disconnect
     void removeAllParticipants();

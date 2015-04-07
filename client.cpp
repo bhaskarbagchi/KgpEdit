@@ -37,7 +37,7 @@ Client::Client(CodeEditor *editor, ParticipantsPane *participantsPane, ChatPane 
     connect(socket, SIGNAL(connected()), this, SLOT(onNewConnection()));
     connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayError(QAbstractSocket::SocketError)));
 
-    permissions = Enu::Waiting;
+    permissions = Enu::ReadWrite;
 
     socket->setSocketOption(QAbstractSocket::KeepAliveOption, 1);
     blockSize = 0;

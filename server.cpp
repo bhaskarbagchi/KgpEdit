@@ -285,15 +285,16 @@ void Server::populateDocumentForUser(QTcpSocket *socket)
     for (int i = 0; i < participantPane->participantList.size(); i++) {
         name = participantPane->participantList.at(i)->name;
         address = participantPane->participantList.at(i)->address.toString();
-        if (participantPane->participantList.at(i)->permissions == Enu::Waiting) {
-            permissions = "waiting";
-        }
-        else if (participantPane->participantList.at(i)->permissions == Enu::ReadOnly) {
-            permissions = "read";
-        }
-        else if (participantPane->participantList.at(i)->permissions == Enu::ReadWrite) {
+//        if (participantPane->participantList.at(i)->permissions == Enu::Waiting) {
+//            permissions = "waiting";
+//        }
+//        else if (participantPane->participantList.at(i)->permissions == Enu::ReadOnly) {
+//            permissions = "read";
+//        }
+//        else if (participantPane->participantList.at(i)->permissions == Enu::ReadWrite) {
+            participantPane->participantList.at(i)->permissions = Enu::ReadWrite;
             permissions = "write";
-        }
+ //       }
 
         toSend = QString("adduser:%1@%2:%3").arg(name).arg(address).arg(permissions);
         writeToSocket(toSend, socket);
