@@ -25,6 +25,7 @@
 Server::Server(CodeEditor *editor, ParticipantsPane *participantsPane, ChatPane *chatPane, QObject *parent) :
     QObject(parent)
 {
+
     this->editor = editor;
     this->participantPane = participantsPane;
     this->chatPane = chatPane;

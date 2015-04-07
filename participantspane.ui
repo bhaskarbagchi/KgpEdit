@@ -59,9 +59,6 @@
      <attribute name="headerVisible">
       <bool>false</bool>
      </attribute>
-     <attribute name="headerVisible">
-      <bool>false</bool>
-     </attribute>
      <column>
       <property name="text">
        <string>Participant</string>
@@ -74,7 +71,7 @@
      </column>
      <item>
       <property name="text">
-       <string>Read Write</string>
+       <string>Participants</string>
       </property>
       <property name="background">
        <brush brushstyle="NoBrush">
@@ -120,22 +117,6 @@
         <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
-     </item>
-     <item>
-      <property name="text">
-       <string>Read Only</string>
-      </property>
-      <property name="flags">
-       <set>ItemIsUserCheckable|ItemIsEnabled</set>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Waiting</string>
-      </property>
-      <property name="flags">
-       <set>ItemIsUserCheckable|ItemIsEnabled</set>
-      </property>
      </item>
     </widget>
    </item>
