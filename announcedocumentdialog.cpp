@@ -32,6 +32,9 @@ AnnounceDocumentDialog::AnnounceDocumentDialog(QWidget *parent) :
     QRegExp nameRx("[a-zA-Z0-9_]*");
     nameValidator = new QRegExpValidator(nameRx, 0);
     ui->nameLineEdit->setValidator(nameValidator);
+    ui->broadcastCheckBox->hide();
+   // ui->prefrencesLabel->hide();
+    ui->alwaysUseCheckBox->hide();
 //    ui->prefrencesLabel->setFont(QFont(Utilities::labelFont, Utilities::labelFontSize - 1));
 }
 
@@ -48,7 +51,7 @@ bool AnnounceDocumentDialog::isBroadcastingChecked()
 void AnnounceDocumentDialog::setAnnounceDialogInfo(QString name, bool alwaysUseThisName)
 {
     ui->nameLineEdit->setText(name);
-    ui->alwaysUseCheckBox->setChecked(alwaysUseThisName);
+    ui->alwaysUseCheckBox->setChecked(false);
 }
 
 void AnnounceDocumentDialog::dialogAccepted()
@@ -57,3 +60,5 @@ void AnnounceDocumentDialog::dialogAccepted()
         emit announceDocument(ui->nameLineEdit->text(), ui->broadcastCheckBox->checkState(), ui->alwaysUseCheckBox->checkState());
     }
 }
+
+

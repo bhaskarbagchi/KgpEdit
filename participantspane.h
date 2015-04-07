@@ -62,6 +62,7 @@ public:
     QString getNameAddressForSocket(QTcpSocket *socket);
 
     // Client participant pane add participant functions
+
     void newParticipant(QString name, QString address, QString permissions = "waiting");
 
     // For when we disconnect

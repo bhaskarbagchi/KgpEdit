@@ -491,13 +491,13 @@ void MainWindow::on_actionTools_Announce_Document_triggered()
     if (tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->docHasCollaborated()) {
         return; // this SHOULD never happen, but just in case.
     }
-    if (preferencesDialog->getAlwaysUseMyName() && preferencesDialog->getMyName() != "") {
-        tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->announceDocument(announceDocumentDialog->isBroadcastingChecked());
-        tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->setOwnerName(preferencesDialog->getMyName());
-    }
-    else {
+//    if (preferencesDialog->getAlwaysUseMyName() && preferencesDialog->getMyName() != "") {
+//        tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->announceDocument(announceDocumentDialog->isBroadcastingChecked());
+//        tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->setOwnerName(preferencesDialog->getMyName());
+//    }
+//    else {
         announceDocumentDialog->show();
-    }
+ //   }
 }
 
 void MainWindow::on_actionHelp_How_to_Collaborate_triggered()

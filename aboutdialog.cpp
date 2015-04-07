@@ -34,7 +34,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
 //    else {
 //        ui->labelMac->hide();
 //    }
-
+  ui->labelPc->hide();
 }
 
 AboutDialog::~AboutDialog()

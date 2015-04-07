@@ -29,7 +29,7 @@ ConnectToDocument::ConnectToDocument(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->previousDocsComboBox->setFixedWidth(150);
+    //ui->previousDocsComboBox->setFixedWidth(150);
 
     readSettings();
 
@@ -51,7 +51,7 @@ ConnectToDocument::ConnectToDocument(QWidget *parent) :
     udpSocket->bind(45321);
     connect(udpSocket, SIGNAL(readyRead()), this, SLOT(processPendingDatagrams()));
 
-    connect(ui->listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(listWidgetItemClicked(QListWidgetItem*)));
+    //connect(ui->listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(listWidgetItemClicked(QListWidgetItem*)));
 }
 
 ConnectToDocument::~ConnectToDocument()
@@ -75,9 +75,9 @@ void ConnectToDocument::addInfo()
     if (!previousInfo.contains(newItem)) {
         if (previousInfo.size() > 4) {
             previousInfo.removeFirst();
-            ui->previousDocsComboBox->removeItem(1);
+            //ui->previousDocsComboBox->removeItem(1);
         }
-        ui->previousDocsComboBox->addItem(newItem);
+        //ui->previousDocsComboBox->addItem(newItem);
         previousInfo.append(newItem);
     }
 }
@@ -89,7 +89,7 @@ void ConnectToDocument::readSettings()
     for (int i = 0; i < length; ++i) {
         settings.setArrayIndex(i);
         previousInfo.append(settings.value("allInfo").toString());
-        ui->previousDocsComboBox->addItem(settings.value("allInfo").toString());
+        //ui->previousDocsComboBox->addItem(settings.value("allInfo").toString());
     }
     settings.endArray();
 }
@@ -117,15 +117,15 @@ void ConnectToDocument::dialogAccepted()
 
 void ConnectToDocument::on_previousDocsComboBox_currentIndexChanged()
 {
-    if (ui->previousDocsComboBox->currentText() != "New...") {
-        QString info = ui->previousDocsComboBox->currentText();
-        QRegExp rx = QRegExp("(\\w+)@([0-9\\.]+):(\\d+)");
-        if (info.contains(rx)) {
-            ui->usernameLineEdit->setText(rx.cap(1).toAscii());
-            ui->addressLineEdit->setText(rx.cap(2).toAscii());
-            ui->portLineEdit->setText(rx.cap(3).toAscii());
-        }
-    }
+//   if (ui->previousDocsComboBox->currentText() != "New...") {
+//        QString info = ui->previousDocsComboBox->currentText();
+//        QRegExp rx = QRegExp("(\\w+)@([0-9\\.]+):(\\d+)");
+//        if (info.contains(rx)) {
+//            ui->usernameLineEdit->setText(rx.cap(1).toAscii());
+//            ui->addressLineEdit->setText(rx.cap(2).toAscii());
+//            ui->portLineEdit->setText(rx.cap(3).toAscii());
+//       }
+//    }
 }
 
 void ConnectToDocument::processPendingDatagrams()
@@ -144,13 +144,13 @@ void ConnectToDocument::processPendingDatagrams()
                     return; // item already exists in the list, nothing to do here
                 }
             }
-            QListWidgetItem *item = new QListWidgetItem(data, ui->listWidget);
-            ui->listWidget->insertItem(0, item);
+          //  QListWidgetItem *item = new QListWidgetItem(data, ui->listWidget);
+            //ui->listWidget->insertItem(0, item);
 
             QTimer *timer = new QTimer(this);
             timer->start(5000); // five second timeout
             connect(timer, SIGNAL(timeout()), this, SLOT(timerTimedOut()));
-            itemList.prepend(item);
+            //itemList.prepend(item);
             timerList.prepend(timer);
         }
     }
@@ -167,7 +167,7 @@ void ConnectToDocument::timerTimedOut()
         }
     }
 //    qDebug() << "removing item";
-    ui->listWidget->takeItem(index); // This is guaranteed to be at the same index as the itemList/timerList
+    //ui->listWidget->takeItem(index); // This is guaranteed to be at the same index as the itemList/timerList
     itemList.removeAt(index);
     timerList.removeAt(index);
 }

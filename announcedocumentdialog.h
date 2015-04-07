@@ -45,6 +45,8 @@ public slots:
 private slots:
     void dialogAccepted();
 
+    //void on_buttonBox_clicked(QAbstractButton *button);
+
 signals:
     void announceDocument(QString name, Qt::CheckState broadcastCheckState, Qt::CheckState alwaysUseChecked);
 };
