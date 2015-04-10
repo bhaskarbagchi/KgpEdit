@@ -90,6 +90,7 @@ void Client::processData(QString data)
             QString name = rx.cap(1);
             QString address = rx.cap(2);
             participantPane->newParticipant(name, address);
+            this->resynchronize();
         }
     }
     else if (data.startsWith("leave:")) {
@@ -196,7 +197,6 @@ void Client::onNewConnection()
     connect(socket, SIGNAL(readyRead()), this, SLOT(onIncomingData()));
     QString toSend = QString("helo:%1").arg(myName);
     writeToServer(toSend);
-    this->resynchronize();
 }
 
 void Client::disconnected()

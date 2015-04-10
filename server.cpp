@@ -17,7 +17,6 @@ Server::Server(CodeEditor *editor, ParticipantsPane *participantsPane, ChatPane 
     connect(chatPane, SIGNAL(returnPressed(QString)), this, SLOT(onChatSend(QString)));
 
     connect(participantPane, SIGNAL(memberCanNowRead(QTcpSocket*)), this, SLOT(populateDocumentForUser(QTcpSocket*)));
-    connect(participantPane, SIGNAL(memberPermissionsChanged(QTcpSocket*,QString)), this, SLOT(memberPermissionsChanged(QTcpSocket*,QString)));
 
     connect(server, SIGNAL(newConnection()), this, SLOT(onNewConnection()));
 }
@@ -52,7 +51,6 @@ void Server::writeToAll(QString string, QTcpSocket *exception)
         for (int i = 0; i < participantPane->participantList.size(); i++) {
             if (participantPane->participantList.at(i)->socket != exception && participantPane->canRead(participantPane->participantList.at(i)->socket)) {
                 participantPane->participantList.at(i)->socket->write(block);
-//                writeToSocket(string, participantPane->participantList.at(i)->socket);
             }
         }
     }
@@ -95,8 +93,6 @@ void Server::processData(QString data, QTcpSocket *sender)
 {
     QString toSend;
     QTcpSocket *exception = 0;
-
-//    qDebug() << "odata: " << data;
 
     QRegExp rx;
     if (data.startsWith("doc:")) {

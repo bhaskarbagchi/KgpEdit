@@ -48,7 +48,6 @@ void ParticipantsPane::newParticipant(QTcpSocket *socket)
     participant->permissions = Enu::ReadWrite;
     participant->socket = socket;
     participant->address = socket->peerAddress();
-    emit memberPermissionsChanged(participant->socket, "write");
 
     // Initializes the incoming block size to 0
     participant->blockSize = 0;

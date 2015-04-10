@@ -76,7 +76,6 @@ private slots:
 
 signals:
     void memberCanNowRead(QTcpSocket *member);
-    void memberPermissionsChanged(QTcpSocket *member, QString readability);
 };
 
 #endif // PARTICIPANTSPANE_H
