@@ -9,7 +9,6 @@
 #include <QTextCodec>
 #include <QtWidgets/QFontDialog>
 #include <QTextDocument>
-#include <QDebug>
 #include <QCloseEvent>
 #include <QDesktopWidget>
 #include <QDesktopServices>

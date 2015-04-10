@@ -1,7 +1,6 @@
 #include "connecttodocument.h"
 #include "ui_connecttodocument.h"
 
-#include <QDebug>
 #include <QSettings>
 #include <QTimer>
 

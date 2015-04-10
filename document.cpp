@@ -6,13 +6,11 @@
 
 #include <QDialog>
 #include <QRegExp>
-#include <QDebug>
 #include <QFontMetrics>
 #include <QWebView>
 #include <QLayout>
 #include <QMessageBox>
 #include <QTextDocumentFragment>
-#include <QDebug>
 
 Document::Document(QWidget *parent) :
     QWidget(parent),

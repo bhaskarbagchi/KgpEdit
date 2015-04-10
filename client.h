@@ -31,7 +31,6 @@ private:
     QTcpSocket *socket;
 
     QString myName;
-    Enu::Permissions permissions;
 
     void processData(QString data);
 

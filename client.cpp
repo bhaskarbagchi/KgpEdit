@@ -19,8 +19,6 @@ Client::Client(CodeEditor *editor, ParticipantsPane *participantsPane, ChatPane 
     connect(socket, SIGNAL(connected()), this, SLOT(onNewConnection()));
     connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayError(QAbstractSocket::SocketError)));
 
-    permissions = Enu::ReadWrite;
-
     socket->setSocketOption(QAbstractSocket::KeepAliveOption, 1);
     blockSize = 0;
 }
@@ -90,7 +88,6 @@ void Client::processData(QString data)
             QString name = rx.cap(1);
             QString address = rx.cap(2);
             participantPane->newParticipant(name, address);
-            this->resynchronize();
         }
     }
     else if (data.startsWith("leave:")) {
@@ -102,21 +99,11 @@ void Client::processData(QString data)
             participantPane->removeParticipant(name, address);
         }
     }
-    else if (data.startsWith("adduser:")) {
-        data.remove(0, 8);
-        rx = QRegExp("([a-zA-Z0-9_]*)@([0-9\\.]*):(waiting|read|write)");
-        if (data.contains(rx)) {
-            QString name = rx.cap(1);
-            QString address = rx.cap(2);
-            QString permissions = rx.cap(3);
-            participantPane->newParticipant(name, address, permissions);
-        }
-    }
     else if (data.startsWith("sync:")) { // the data is the entire document
         data.remove(0, 5);
         // set the document's contents to the contents of the packet
         editor->setPlainText(data);
-        editor->setReadOnly(Enu::ReadWrite != permissions);
+        editor->setReadOnly(false);
     }
     else if (data.startsWith("helo:")) {
         data.remove(0, 5);

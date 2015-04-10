@@ -18,7 +18,6 @@ struct Participant {
     QTreeWidgetItem *item;
 
     // Only used by the owner:
-    int permissions;
     QTcpSocket *socket;
     // Used to store the incoming packet's size
     quint32 blockSize;
@@ -43,7 +42,7 @@ public:
 
     // Client participant pane add participant functions
 
-    void newParticipant(QString name, QString address, QString permissions = "waiting");
+    void newParticipant(QString name, QString address);
 
     // For when we disconnect
     void removeAllParticipants();
@@ -52,12 +51,7 @@ public:
     // This is a function to be used by the participants in removing participants via control messages.
     void removeParticipant(QString name, QString address);
 
-    void setParticipantPermissions(QString name, QString address, QString permissions);
-
     void setOwnerName(QString name);
-
-    bool canWrite(QTcpSocket *socket);
-    bool canRead(QTcpSocket *socket);
 
     void setFont(QFont font);
 

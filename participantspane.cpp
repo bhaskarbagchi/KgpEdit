@@ -45,7 +45,6 @@ void ParticipantsPane::newParticipant(QTcpSocket *socket)
     participantMap.insert(socket, participant);
 
     participant->socket = socket;
-    participant->permissions = Enu::ReadWrite;
     participant->socket = socket;
     participant->address = socket->peerAddress();
 
@@ -74,7 +73,6 @@ bool ParticipantsPane::addParticipant(QString name, QTcpSocket *socket)
 
     participant->item->setBackgroundColor(1, participant->color);
     participant->item->setToolTip(0, QString("%1@%2").arg(name).arg(participant->address.toString()));
-
     return true;
 }
 
@@ -95,7 +93,7 @@ QString ParticipantsPane::getNameAddressForSocket(QTcpSocket *socket)
     }
 }
 
-void ParticipantsPane::newParticipant(QString name, QString address, QString permissions)
+void ParticipantsPane::newParticipant(QString name, QString address)
 {
     // The server has given us a name to add to the treeWidget
     Participant *participant = new Participant;
@@ -106,7 +104,6 @@ void ParticipantsPane::newParticipant(QString name, QString address, QString per
 
     participant->color = QColor::fromHsv(qrand() % 256, 190, 190);
     participant->item = new QTreeWidgetItem(rwItem);
-    participant->permissions = Enu::ReadWrite;
 
     participant->item->setText(0, name);
     participant->item->setBackgroundColor(1, participant->color);
@@ -149,32 +146,9 @@ void ParticipantsPane::removeParticipant(QString name, QString address)
     }
 }
 
-void ParticipantsPane::setParticipantPermissions(QString name, QString address, QString permissions)
-{
-    QString fullName = name + "@" + address;
-    for (int i = 0; i < participantList.size(); i++) {
-        if (participantList.at(i)->item->toolTip(0) == fullName) {
-            Participant *participant = participantList.at(i);
-            participant->item->parent()->removeChild(participant->item);
-            rwItem->addChild(participant->item);
-            participant->permissions = Enu::ReadWrite;
-        }
-    }
-}
-
 void ParticipantsPane::setOwnerName(QString name)
 {
     owner->setText(0, name);
-}
-
-bool ParticipantsPane::canWrite(QTcpSocket *socket)
-{
-    return participantMap.contains(socket) && participantMap.value(socket)->permissions == Enu::ReadWrite;
-}
-
-bool ParticipantsPane::canRead(QTcpSocket *socket)
-{
-    return participantMap.value(socket)->permissions == Enu::ReadOnly || participantMap.value(socket)->permissions == Enu::ReadWrite;
 }
 
 void ParticipantsPane::setFont(QFont font)

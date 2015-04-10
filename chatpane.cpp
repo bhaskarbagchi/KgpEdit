@@ -3,7 +3,6 @@
 
 #include "utilities.h"
 
-#include <QDebug>
 #include <QKeyEvent>
 #include <QGridLayout>
 #include <QSettings>

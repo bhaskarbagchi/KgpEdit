@@ -49,7 +49,7 @@ void Server::writeToAll(QString string, QTcpSocket *exception)
         out << (quint32)(block.size() - sizeof(quint32));
 
         for (int i = 0; i < participantPane->participantList.size(); i++) {
-            if (participantPane->participantList.at(i)->socket != exception && participantPane->canRead(participantPane->participantList.at(i)->socket)) {
+            if (participantPane->participantList.at(i)->socket != exception) {
                 participantPane->participantList.at(i)->socket->write(block);
             }
         }
@@ -96,9 +96,6 @@ void Server::processData(QString data, QTcpSocket *sender)
 
     QRegExp rx;
     if (data.startsWith("doc:")) {
-        if (!participantPane->canWrite(sender)) {
-            return;
-        }
         toSend = data;
         data.remove(0, 4);
         // detect line number, then put text at that line.
@@ -113,9 +110,6 @@ void Server::processData(QString data, QTcpSocket *sender)
         }
     }
     else if (data.startsWith("chat:")) {
-        if (!participantPane->canRead(sender)) {
-            return;
-        }
         data.remove(0, 5);
         toSend = QString("%1:\t%2").arg(participantPane->getNameForSocket(sender)).arg(data);
         chatPane->appendChatMessage(toSend);
@@ -123,9 +117,6 @@ void Server::processData(QString data, QTcpSocket *sender)
         exception = sender;
     }
     else if (data.startsWith("resync")) { // user requesting resync of the entire document
-        if (!participantPane->canRead(sender)) {
-            return;
-        }
         populateDocumentForUser(sender);
     }
     else if (data.startsWith("helo:")) {
@@ -136,6 +127,7 @@ void Server::processData(QString data, QTcpSocket *sender)
             if (participantPane->addParticipant(name, sender)) { // returns false if there is a duplicate
                 toSend = "join:" + participantPane->getNameAddressForSocket(sender);
                 writeToSocket(QString("helo:%1").arg(myName).toAscii(), sender);
+                populateDocumentForUser(sender);
             }
             else {
                 disconnect(sender, SIGNAL(disconnected()), this, SLOT(disconnected()));
@@ -235,21 +227,12 @@ void Server::populateDocumentForUser(QTcpSocket *socket)
     toSend.clear();
     QString name;
     QString address;
-    QString permissions;
     for (int i = 0; i < participantPane->participantList.size(); i++) {
+        if (participantPane->participantMap.value(socket)==participantPane->participantList.at(i))
+                continue;
         name = participantPane->participantList.at(i)->name;
         address = participantPane->participantList.at(i)->address.toString();
-        if (participantPane->participantList.at(i)->permissions == Enu::Waiting) {
-            permissions = "waiting";
-        }
-        else if (participantPane->participantList.at(i)->permissions == Enu::ReadOnly) {
-            permissions = "read";
-        }
-        else if (participantPane->participantList.at(i)->permissions == Enu::ReadWrite) {
-            permissions = "write";
-        }
-
-        toSend = QString("adduser:%1@%2:%3").arg(name).arg(address).arg(permissions);
+        toSend = QString("join:%1@%2").arg(name).arg(address);
         writeToSocket(toSend, socket);
     }
 }

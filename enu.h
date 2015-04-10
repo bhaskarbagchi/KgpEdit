@@ -8,15 +8,6 @@ namespace Enu
    {
         GET, JOIN, LEAVE,
     };
-
-   enum Permissions {
-       ReadWrite = 2,
-       ReadOnly = 1,
-       Waiting = 0,
-
-       Owner = 1,
-   };
-
 }
 
 #endif // ENU_H
