@@ -238,16 +238,6 @@ void Document::setChatHidden(bool b)
     }
 }
 
-void Document::shiftLeft()
-{
-    editor->shiftLeft();
-}
-
-void Document::shiftRight()
-{
-    editor->shiftRight();
-}
-
 void Document::unCommentSelection()
 {
     editor->unCommentSelection();

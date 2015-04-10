@@ -47,10 +47,6 @@ public:
     void setParticipantsHidden(bool b);
     // shows/hides the chat pane
     void setChatHidden(bool b);
-    // shifts the current line/selected lines left
-    void shiftLeft();
-    // shifts the current line/selected lines right
-    void shiftRight();
     // C++ style (un)commenting
     void unCommentSelection();
 

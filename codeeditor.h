@@ -28,8 +28,6 @@ public:
     void collabTextChange(int pos, int charsRemoved, int charsAdded, QString data);
 
     void unCommentSelection();
-    void shiftLeft();
-    void shiftRight();
 
     // Find functions
     bool findNext(QString searchString, Qt::CaseSensitivity sensitivity, bool wrapAround, Enu::FindMode mode);
