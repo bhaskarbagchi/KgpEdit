@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Kgp-edit</string>
+   <string>Kgp-Edit</string>
   </property>
   <property name="unifiedTitleAndToolBarOnMac">
    <bool>true</bool>
@@ -91,7 +91,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionFile_Open">
    <property name="icon">
-    <iconset resource="cahootsresc.qrc">
+    <iconset>
      <normaloff>:/images/open.png</normaloff>:/images/open.png</iconset>
    </property>
    <property name="text">
@@ -106,7 +106,7 @@
   </action>
   <action name="actionFile_Save">
    <property name="icon">
-    <iconset resource="cahootsresc.qrc">
+    <iconset resource="kgpeditresc.qrc">
      <normaloff>:/images/save.png</normaloff>:/images/save.png</iconset>
    </property>
    <property name="text">
@@ -132,7 +132,7 @@
   </action>
   <action name="actionFile_New">
    <property name="icon">
-    <iconset resource="cahootsresc.qrc">
+    <iconset resource="kgpeditresc.qrc">
      <normaloff>:/images/new.png</normaloff>:/images/new.png</iconset>
    </property>
    <property name="text">
@@ -147,7 +147,7 @@
   </action>
   <action name="actionFile_Print">
    <property name="icon">
-    <iconset resource="cahootsresc.qrc">
+    <iconset>
      <normaloff>:/images/print.png</normaloff>:/images/print.png</iconset>
    </property>
    <property name="text">
@@ -165,7 +165,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="cahootsresc.qrc">
+    <iconset resource="kgpeditresc.qrc">
      <normaloff>:/images/undo.png</normaloff>:/images/undo.png</iconset>
    </property>
    <property name="text">
@@ -183,7 +183,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="cahootsresc.qrc">
+    <iconset resource="kgpeditresc.qrc">
      <normaloff>:/images/redo.png</normaloff>:/images/redo.png</iconset>
    </property>
    <property name="text">
@@ -198,7 +198,7 @@
   </action>
   <action name="actionEdit_Cut">
    <property name="icon">
-    <iconset resource="cahootsresc.qrc">
+    <iconset resource="kgpeditresc.qrc">
      <normaloff>:/images/cut.png</normaloff>:/images/cut.png</iconset>
    </property>
    <property name="text">
@@ -213,7 +213,7 @@
   </action>
   <action name="actionEdit_Copy">
    <property name="icon">
-    <iconset resource="cahootsresc.qrc">
+    <iconset resource="kgpeditresc.qrc">
      <normaloff>:/images/copy.png</normaloff>:/images/copy.png</iconset>
    </property>
    <property name="text">
@@ -228,7 +228,7 @@
   </action>
   <action name="actionEdit_Paste">
    <property name="icon">
-    <iconset resource="cahootsresc.qrc">
+    <iconset resource="kgpeditresc.qrc">
      <normaloff>:/images/paste.png</normaloff>:/images/paste.png</iconset>
    </property>
    <property name="text">
@@ -256,7 +256,7 @@
   </action>
   <action name="actionFile_Close">
    <property name="icon">
-    <iconset resource="cahootsresc.qrc">
+    <iconset resource="kgpeditresc.qrc">
      <normaloff>:/images/close.png</normaloff>:/images/close.png</iconset>
    </property>
    <property name="text">
@@ -415,7 +415,7 @@
   </action>
   <action name="actionHelp_About_Cahoots">
    <property name="icon">
-    <iconset resource="cahootsresc.qrc">
+    <iconset resource="kgpeditresc.qrc">
      <normaloff>:/images/help.png</normaloff>:/images/help.png</iconset>
    </property>
    <property name="text">
@@ -432,7 +432,7 @@
   </action>
   <action name="actionHelp_How_to_Collaborate">
    <property name="icon">
-    <iconset resource="cahootsresc.qrc">
+    <iconset resource="kgpeditresc.qrc">
      <normaloff>:/images/help.png</normaloff>:/images/help.png</iconset>
    </property>
    <property name="text">
@@ -445,7 +445,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="cahootsresc.qrc"/>
+  <include location="kgpeditresc.qrc"/>
  </resources>
  <connections/>
 </ui>

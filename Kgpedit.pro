@@ -15,8 +15,8 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x000000
 RC_FILE = cahootsresources.rc
 
 # Mac icon/plist
-ICON = images/icon.icns
-QMAKE_INFO_PLIST = app.plist
+ICON =
+QMAKE_INFO_PLIST =
 SOURCES += main.cpp \
     mainwindow.cpp \
     document.cpp \
@@ -69,7 +69,7 @@ FORMS += mainwindow.ui \
     firstrundialog.ui \
     aboutdialog.ui \
     helpdialog.ui
-RESOURCES += cahootsresc.qrc \
+RESOURCES += \
     #highlighters.qrc \
-    helpresources.qrc
-OTHER_FILES += help/collaboration.html
+    kgpeditresc.qrc
+OTHER_FILES +=
