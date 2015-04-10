@@ -75,7 +75,7 @@ Document::~Document()
     delete ui;
 }
 
-void Document::announceDocument(bool broadcastDocument)
+void Document::announceDocument()
 {
     startedCollaborating = true;
     setChatHidden(false);
@@ -83,13 +83,8 @@ void Document::announceDocument(bool broadcastDocument)
 
     server = new Server(editor, participantPane, chatPane, this);
 
-    if (broadcastDocument) {
-        server->startBroadcasting();
-    }
-
     server->listen(QHostAddress::Any, 0); // Port is chosen automatically, listening on all NICs
     QString port = QString::number(server->serverPort(), 10);
-
 
     QString ipAddress;
     QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();

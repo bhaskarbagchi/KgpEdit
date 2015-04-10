@@ -14,23 +14,19 @@ public:
     AnnounceDocumentDialog(QWidget *parent = 0);
     ~AnnounceDocumentDialog();
 
-    bool isBroadcastingChecked();
-
 private:
     Ui::AnnounceDocumentDialog *ui;
 
     QRegExpValidator *nameValidator;
 
 public slots:
-    void setAnnounceDialogInfo(QString name, bool alwaysUseThisName);
+    void setAnnounceDialogInfo(QString name);
 
 private slots:
     void dialogAccepted();
 
-    //void on_buttonBox_clicked(QAbstractButton *button);
-
 signals:
-    void announceDocument(QString name, Qt::CheckState broadcastCheckState, Qt::CheckState alwaysUseChecked);
+    void announceDocument(QString name);
 };
 
 #endif // ANNOUNCEDOCUMENTDIALOG_H

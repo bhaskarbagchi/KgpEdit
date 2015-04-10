@@ -28,8 +28,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(connectDialog, SIGNAL(connectToDocumentClicked(QStringList)), this, SLOT(connectToDocument(QStringList)));
 
     announceDocumentDialog = new AnnounceDocumentDialog(this);
-    connect(announceDocumentDialog, SIGNAL(announceDocument(QString,Qt::CheckState,Qt::CheckState)),
-            this, SLOT(announceDocument(QString,Qt::CheckState,Qt::CheckState)));
+    connect(announceDocumentDialog, SIGNAL(announceDocument(QString)),
+            this, SLOT(announceDocument(QString)));
 
     Document *document = new Document(ui->tab);
     QGridLayout *tabLayout = new QGridLayout;
@@ -499,9 +499,9 @@ void MainWindow::connectToDocument(QStringList list)
     }
 }
 
-void MainWindow::announceDocument(QString ownerName, Qt::CheckState broadcastCheckState, Qt::CheckState alwaysUserNameCheckState)
+void MainWindow::announceDocument(QString ownerName)
 {
-    tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->announceDocument(broadcastCheckState == Qt::Checked);
+    tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->announceDocument();
     tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->setOwnerName(ownerName);
     ui->actionTools_Announce_Document->setEnabled(false);
 }

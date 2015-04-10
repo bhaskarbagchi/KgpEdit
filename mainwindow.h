@@ -83,7 +83,7 @@ private slots:
     void tabCloseClicked(int index);
 
     void connectToDocument(QStringList list);
-    void announceDocument(QString ownerName, Qt::CheckState broadcastCheckState, Qt::CheckState alwaysUserNameCheckState);
+    void announceDocument(QString ownerName);
 
     void setEditorFont(QFont font);
     void setChatFont(QFont font);
