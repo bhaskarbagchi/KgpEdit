@@ -454,24 +454,3 @@ void MainWindow::announceDocument(QString ownerName)
     tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->setOwnerName(ownerName);
     ui->actionTools_Announce_Document->setEnabled(false);
 }
-
-void MainWindow::setEditorFont(QFont font)
-{
-    for (int i = 0; i < tabWidgetToDocumentMap.size(); i++) {
-        tabWidgetToDocumentMap.value(ui->tabWidget->widget(i))->setEditorFont(font);
-    }
-}
-
-void MainWindow::setChatFont(QFont font)
-{
-    for (int i = 0; i < tabWidgetToDocumentMap.size(); i++) {
-        tabWidgetToDocumentMap.value(ui->tabWidget->widget(i))->setChatFont(font);
-    }
-}
-
-void MainWindow::setParticipantsFont(QFont font)
-{
-    for (int i = 0; i < tabWidgetToDocumentMap.size(); i++) {
-        tabWidgetToDocumentMap.value(ui->tabWidget->widget(i))->setParticipantsFont(font);
-    }
-}

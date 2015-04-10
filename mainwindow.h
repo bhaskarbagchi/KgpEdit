@@ -77,10 +77,6 @@ private slots:
 
     void connectToDocument(QStringList list);
     void announceDocument(QString ownerName);
-
-    void setEditorFont(QFont font);
-    void setChatFont(QFont font);
-    void setParticipantsFont(QFont font);
 };
 
 #endif // MAINWINDOW_H
