@@ -9,8 +9,8 @@
         <file>images/redo.png</file>
         <file>images/save.png</file>
         <file>images/undo.png</file>
-        <file>images/cahootsicon.png</file>
-        <file>images/cahootssplash.png</file>
+        <file>images/kgpediticon.png</file>
+        <file>images/kgpeditsplash.png</file>
         <file>images/icon.png</file>
     </qresource>
 </RCC>
