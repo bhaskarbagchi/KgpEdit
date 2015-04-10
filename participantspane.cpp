@@ -16,9 +16,6 @@ ParticipantsPane::ParticipantsPane(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect(ui->treeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
-            this, SLOT(onCurrentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
-
     ui->connectInfoLabel->hide();
     ui->treeWidget->resizeColumnToContents(0);
     ui->treeWidget->resizeColumnToContents(1);
