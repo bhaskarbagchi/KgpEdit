@@ -3,6 +3,7 @@
 #include <QTextBlock>
 #include <QKeyEvent>
 #include <QTextCharFormat>
+#include <QDebug>
 
 ChatBrowser::ChatBrowser(QWidget *parent) : QTextEdit(parent)
 {
@@ -18,13 +19,15 @@ void ChatBrowser::keyPressEvent(QKeyEvent *e)
 
 void ChatBrowser::addChatLine(QString str, QColor color)
 {
-    QRegExp rx("([a-zA-Z0-9_]*):\t(.*)");
+    QRegExp rx("([a-zA-Z0-9_]*):\t([0-9]*):\t(.*)");
     if (str.contains(rx)) {
-        str = "<b>" + rx.cap(1) + ":</b>\t" + rx.cap(2);
-    }
-    else {
-        str = "<b>" + str + "</b>";
+        str = rx.cap(2) + "      " + rx.cap(1) + ": " + rx.cap(3);
     }
     append(str);
+
+    QStringList strings = this->toPlainText().split(QRegExp("\n|\r\n|\r"));
+    strings.sort();
+    this->setPlainText(strings.join('\n'));
+
     return;
 }

@@ -2,6 +2,7 @@
 
 #include <QTextDocumentFragment>
 #include <QMessageBox>
+#include <QDateTime>
 
 Client::Client(CodeEditor *editor, ParticipantsPane *participantsPane, ChatPane *chatPane, QObject *parent) :
     QObject(parent)
@@ -136,12 +137,12 @@ void Client::onTextChange(int pos, int charsRemoved, int charsAdded)
 
 void Client::onChatSend(QString str)
 {
-    QString toSend;
+    QString timeStamp = QString::number(QDateTime::currentMSecsSinceEpoch());
+    QString toSend = "chat:" + QString("%1:\t%2:\t%3").arg(myName).arg(timeStamp).arg(str);
 
-    toSend = "chat:" + str;
     writeToServer(toSend);
 
-    chatPane->appendChatMessage(QString("%1:\t%2").arg(myName).arg(str));
+    chatPane->appendChatMessage(QString("%1:\t%2:\t%3").arg(myName).arg(timeStamp).arg(str));
 }
 
 void Client::onIncomingData()

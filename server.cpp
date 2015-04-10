@@ -3,6 +3,7 @@
 #include <QTextDocumentFragment>
 #include <QNetworkInterface>
 #include <QMessageBox>
+#include <QDateTime>
 
 Server::Server(CodeEditor *editor, ParticipantsPane *participantsPane, ChatPane *chatPane, QObject *parent) :
     QObject(parent)
@@ -111,7 +112,7 @@ void Server::processData(QString data, QTcpSocket *sender)
     }
     else if (data.startsWith("chat:")) {
         data.remove(0, 5);
-        toSend = QString("%1:\t%2").arg(participantPane->getNameForSocket(sender)).arg(data);
+        toSend = data;
         chatPane->appendChatMessage(toSend);
         toSend.insert(0, "chat:");
         exception = sender;
@@ -162,11 +163,11 @@ void Server::onTextChange(int pos, int charsRemoved, int charsAdded)
 
 void Server::onChatSend(QString str)
 {
-    QString toSend;
+    QString timeStamp = QString::number(QDateTime::currentMSecsSinceEpoch());
+    QString toSend = "chat:" + QString("%1:\t%2:\t%3").arg(myName).arg(timeStamp).arg(str);
 
-    toSend = QString("chat:%1:\t%2").arg(myName).arg(str);
     writeToAll(toSend);
-    chatPane->appendChatMessage(QString("%1:\t%2").arg(myName).arg(str));
+    chatPane->appendChatMessage(QString("%1:\t%2:\t%3").arg(myName).arg(timeStamp).arg(str));
 }
 
 void Server::onIncomingData()
