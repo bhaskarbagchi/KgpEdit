@@ -19,8 +19,6 @@ public:
 
     void setName(QString name);
 
-    QStringList previousInfo; // Public list to store previous names; addresses; ports
-
 private:
     Ui::ConnectToDocument *ui;
 
@@ -28,21 +26,8 @@ private:
     QRegExpValidator* addressValidator;
     QRegExpValidator* portValidator;
 
-    QUdpSocket *udpSocket;
-
-    QList<QTimer*> timerList;
-    QList<QListWidgetItem*> itemList;
-
-    void addInfo();
-
-    void readSettings();
-    void writeSettings();
-
 private slots:
     void dialogAccepted();
-    void processPendingDatagrams();
-    void timerTimedOut();
-    void listWidgetItemClicked(QListWidgetItem *current);
 
 signals:
     void connectToDocumentClicked(QStringList list);
