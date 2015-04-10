@@ -17,8 +17,6 @@ public:
 
     bool listen(const QHostAddress & address = QHostAddress::Any, quint16 port = 0);
 
-    void startBroadcasting();
-
     quint16 serverPort();
 
     // This writes to all sockets except exception
@@ -36,10 +34,6 @@ private:
     ChatPane *chatPane;
 
     QTcpServer *server;
-
-    QUdpSocket *udpSocket;
-    QTimer *timer;
-
     QString myName;
 
     void processData(QString data, QTcpSocket *sender);
@@ -51,13 +45,9 @@ private slots:
     void onIncomingData();
     void onNewConnection();
 
-    void memberPermissionsChanged(QTcpSocket *participant, QString permissions);
-
     void populateDocumentForUser(QTcpSocket *socket);
 
     void disconnected();
-
-    void broadcastDatagram();
 
     void displayError(QAbstractSocket::SocketError socketError);
 };

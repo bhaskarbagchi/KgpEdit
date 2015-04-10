@@ -7,7 +7,6 @@
 Server::Server(CodeEditor *editor, ParticipantsPane *participantsPane, ChatPane *chatPane, QObject *parent) :
     QObject(parent)
 {
-
     this->editor = editor;
     this->participantPane = participantsPane;
     this->chatPane = chatPane;
@@ -26,14 +25,6 @@ Server::Server(CodeEditor *editor, ParticipantsPane *participantsPane, ChatPane 
 bool Server::listen(const QHostAddress &address, quint16 port)
 {
     return server->listen(address, port);
-}
-
-void Server::startBroadcasting()
-{
-    timer = new QTimer(this);
-    udpSocket = new QUdpSocket(this);
-    timer->start(1000); // 1 second delay between broadcasts
-    connect(timer, SIGNAL(timeout()), this, SLOT(broadcastDatagram()));
 }
 
 quint16 Server::serverPort()
@@ -238,22 +229,6 @@ void Server::onNewConnection()
     sock->setSocketOption(QAbstractSocket::KeepAliveOption, 1);
 }
 
-void Server::memberPermissionsChanged(QTcpSocket *participant, QString permissions)
-{
-    if (permissions == "kick") {
-        participant->disconnectFromHost(); // disconnected() socket will handle things from here.
-    }
-    else {
-        // send the participant itself the updated permissions specifically
-        QString toSend = QString("updateperm:%1").arg(permissions);
-        writeToSocket(toSend, participant);
-
-        // update all users with the users' new permissions
-        toSend = QString("setperm:%1:%2").arg(participantPane->getNameAddressForSocket(participant)).arg(permissions);
-        writeToAll(toSend);
-    }
-}
-
 void Server::populateDocumentForUser(QTcpSocket *socket)
 {
     // Send entire document
@@ -289,27 +264,6 @@ void Server::disconnected()
     QString toSend = QString("leave:%1").arg(participantPane->getNameAddressForSocket(socket));
     participantPane->removeParticipant(socket);
     writeToAll(toSend);
-}
-
-void Server::broadcastDatagram()
-{
-    QByteArray datagram;
-
-    QString ipAddress;
-    QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
-    // use the first non-localhost IPv4 address
-    for (int i = 0; i < ipAddressesList.size(); ++i) {
-        if (ipAddressesList.at(i) != QHostAddress::LocalHost &&
-            ipAddressesList.at(i).toIPv4Address())
-            ipAddress = ipAddressesList.at(i).toString();
-    }
-    // if we did not find one, use IPv4 localhost
-    if (ipAddress.isEmpty()) {
-        ipAddress = QHostAddress(QHostAddress::LocalHost).toString();
-    }
-
-    datagram = QString("untitled.txt@%1:%2").arg(ipAddress).arg(server->serverPort()).toAscii();
-    udpSocket->writeDatagram(datagram.data(), datagram.size(), QHostAddress::Broadcast, 45321);
 }
 
 void Server::displayError(QAbstractSocket::SocketError socketError)

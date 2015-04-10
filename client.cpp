@@ -19,7 +19,7 @@ Client::Client(CodeEditor *editor, ParticipantsPane *participantsPane, ChatPane 
     connect(socket, SIGNAL(connected()), this, SLOT(onNewConnection()));
     connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayError(QAbstractSocket::SocketError)));
 
-    permissions = Enu::Waiting;
+    permissions = Enu::ReadWrite;
 
     socket->setSocketOption(QAbstractSocket::KeepAliveOption, 1);
     blockSize = 0;
@@ -66,8 +66,6 @@ void Client::resynchronize()
 
 void Client::processData(QString data)
 {
-//    qDebug() << "pdata: " << data;
-
     QRegExp rx;
     if (data.startsWith("doc:")) {
         data.remove(0, 4);
@@ -84,19 +82,6 @@ void Client::processData(QString data)
     else if (data.startsWith("chat:")) {
         data.remove(0, 5);
         chatPane->appendChatMessage(data);
-    }
-    else if (data.startsWith("setperm:")) {
-        data.remove(0, 8);
-        rx = QRegExp("([a-zA-Z0-9_]*)@([0-9\\.]*):(waiting|read|write)");
-        QString name;
-        QString address;
-        QString permissions;
-        if (data.contains(rx)) {
-            name = rx.cap(1);
-            address = rx.cap(2);
-            permissions = rx.cap(3);
-            participantPane->setParticipantPermissions(name, address, permissions);
-        }
     }
     else if (data.startsWith("join:")) {
         data.remove(0, 5);
@@ -116,28 +101,8 @@ void Client::processData(QString data)
             participantPane->removeParticipant(name, address);
         }
     }
-    else if (data.startsWith("updateperm:")) { // the server has updated our permissions
-        data.remove(0, 11);
-        if (data == "write") {
-            permissions = Enu::ReadWrite;
-            editor->setReadOnly(false);
-            participantPane->setDisabled(false);
-        }
-        else if (data == "read") {
-            permissions = Enu::ReadOnly;
-            editor->setReadOnly(true);
-            participantPane->setDisabled(false);
-        }
-        else if (data == "waiting") {
-            permissions = Enu::Waiting;
-            editor->setReadOnly(true);
-            participantPane->setDisabled(true);
-//            participantPane->removeAllParticipants();
-        }
-    }
     else if (data.startsWith("adduser:")) {
         data.remove(0, 8);
-//        qDebug() << "add user: " << data;
         rx = QRegExp("([a-zA-Z0-9_]*)@([0-9\\.]*):(waiting|read|write)");
         if (data.contains(rx)) {
             QString name = rx.cap(1);
