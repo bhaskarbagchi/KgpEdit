@@ -412,10 +412,6 @@ void MainWindow::documentChanged(int index)
     Document *document = tabWidgetToDocumentMap.value(ui->tabWidget->widget(index));
     ui->actionEdit_Undo->setEnabled(document->isUndoable());
     ui->actionEdit_Redo->setEnabled(document->isRedoable());
-    ui->actionWindow_Split->setDisabled(document->isEditorSplit() && !document->isEditorSplitSideBySide());
-    ui->actionWindow_Split_Side_by_Side->setDisabled(document->isEditorSplit() && document->isEditorSplitSideBySide());
-
-    ui->actionWindow_Remove_Split->setEnabled(document->isEditorSplit());
     ui->actionTools_Announce_Document->setDisabled(document->docHasCollaborated());
 }
 

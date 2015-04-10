@@ -61,23 +61,8 @@ public:
     QString getPlainText();
     void setPlainText(QString text);
 
-    // Toggles line wrapping in the editor
-    void toggleLineWrap();
-
     // Used for setting the document's modified attribute to b (for the modified-since-last-save attribute)
     void setModified(bool b);
-
-    // Previews the current document as an HTML webpage in a dialog box
-    void previewAsHtml();
-
-    // Splits the editor vertically from horizontal or no split
-    void splitEditor();
-    // Splits the editor horizontally from vertical or no split
-    void splitEditorSideBySide();
-    // Unsplits the editor
-    void unSplitEditor();
-    bool isEditorSplit();
-    bool isEditorSplitSideBySide();
 
     bool docHasCollaborated();
 

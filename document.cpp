@@ -26,15 +26,11 @@ Document::Document(QWidget *parent) :
     QFontMetrics fm(editor->font());
     editor->setTabStopWidth(fm.averageCharWidth() * 4);
     ui->editorSplitter->insertWidget(0, editor);
-    
-    // editor for split pane editing
     delete ui->bottomEditorFrame;
     bottomEditor = new CodeEditor(this);
     bottomEditor->setFont(editor->font());
     bottomEditor->setTabStopWidth(fm.averageCharWidth() * 4);
     ui->editorSplitter->insertWidget(1, bottomEditor);
-
-    // we don't need the default document since we're using the document of the original editor
     bottomEditor->document()->deleteLater();
     bottomEditor->setDocument(editor->document());
     bottomEditor->hide();
@@ -49,7 +45,7 @@ Document::Document(QWidget *parent) :
     chatPane = new ChatPane();
     ui->codeChatSplitter->insertWidget(1, chatPane);
 
-    // Emit signals to the mainwindow when redoability/undoability changes
+    // Emit signals to the mainwindow if redoability/undoability changes
     connect(editor, SIGNAL(undoAvailable(bool)), this, SIGNAL(undoAvailable(bool)));
     connect(editor, SIGNAL(redoAvailable(bool)), this, SIGNAL(redoAvailable(bool)));
 
@@ -210,7 +206,6 @@ void Document::setParticipantsHidden(bool b)
 
 void Document::setChatHidden(bool b)
 {
-    // Hide/show the widget (contains the chat widget) below the code text edit
     if (b) {
         ui->codeChatSplitter->widget(1)->hide();
     }
@@ -265,70 +260,14 @@ void Document::setPlainText(QString text)
     editor->setPlainText(text);
 }
 
-void Document::toggleLineWrap()
-{
-    if (editor->lineWrapMode() == QPlainTextEdit::NoWrap) {
-        editor->setLineWrapMode(QPlainTextEdit::WidgetWidth);
-        bottomEditor->setLineWrapMode(QPlainTextEdit::WidgetWidth);
-    }
-    else {
-        editor->setLineWrapMode(QPlainTextEdit::NoWrap);
-        bottomEditor->setLineWrapMode(QPlainTextEdit::NoWrap);
-    }
-}
-
 void Document::setModified(bool b)
 {
     editor->document()->setModified(b);
 }
 
-void Document::previewAsHtml()
-{
-    QString text = editor->toPlainText();
-    QWebView *preview = new QWebView();
-    preview->setHtml(text);
-    preview->show();
-}
-
-void Document::splitEditor()
-{
-    ui->editorSplitter->setOrientation(Qt::Vertical);
-    bottomEditor->show();
-    QList<int> sizes;
-    sizes << 500 << 500;
-    ui->editorSplitter->setSizes(sizes);
-}
-
-void Document::splitEditorSideBySide()
-{
-    ui->editorSplitter->setOrientation(Qt::Horizontal);
-    bottomEditor->show();
-    QList<int> sizes;
-    sizes << 500 << 500;
-    ui->editorSplitter->setSizes(sizes);
-}
-
 bool Document::docHasCollaborated()
 {
     return startedCollaborating;
-}
-
-void Document::unSplitEditor()
-{
-    if (!isEditorSplit()) {
-        return;
-    }
-    bottomEditor->hide();
-}
-
-bool Document::isEditorSplit()
-{
-    return !bottomEditor->isHidden();
-}
-
-bool Document::isEditorSplitSideBySide()
-{
-    return ui->editorSplitter->orientation() == Qt::Horizontal;
 }
 
 void Document::setOwnerName(QString name)
