@@ -27,8 +27,7 @@ SOURCES += main.cpp \
     utilities.cpp \
     announcedocumentdialog.cpp \
     firstrundialog.cpp \
-    aboutdialog.cpp \
-    helpdialog.cpp
+    aboutdialog.cpp
 HEADERS += mainwindow.h \
     document.h \
     connecttodocument.h \
@@ -43,8 +42,7 @@ HEADERS += mainwindow.h \
     utilities.h \
     announcedocumentdialog.h \
     firstrundialog.h \
-    aboutdialog.h \
-    helpdialog.h
+    aboutdialog.h
 FORMS += mainwindow.ui \
     document.ui \
     connecttodocument.ui \
@@ -53,8 +51,7 @@ FORMS += mainwindow.ui \
     chatpane.ui \
     announcedocumentdialog.ui \
     firstrundialog.ui \
-    aboutdialog.ui \
-    helpdialog.ui
+    aboutdialog.ui
 RESOURCES += \
     kgpeditresc.qrc
 OTHER_FILES +=

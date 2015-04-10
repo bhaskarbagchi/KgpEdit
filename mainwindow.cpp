@@ -38,8 +38,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(announceDocumentDialog, SIGNAL(announceDocument(QString,Qt::CheckState,Qt::CheckState)),
             this, SLOT(announceDocument(QString,Qt::CheckState,Qt::CheckState)));
 
-    helpDialog = new HelpDialog(this);
-
     // sets the announce dialog to the state of the preferences pane
     announceDocumentDialog->setAnnounceDialogInfo(preferencesDialog->getMyName(), preferencesDialog->getAlwaysUseMyName());
 

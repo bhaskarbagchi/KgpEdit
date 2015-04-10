@@ -8,7 +8,6 @@
 #include "aboutdialog.h"
 #include "firstrundialog.h"
 #include "preferencesdialog.h"
-#include "helpdialog.h"
 
 #include <QSettings>
 
@@ -34,7 +33,6 @@ private:
     PreferencesDialog *preferencesDialog;
     AboutDialog *aboutDialog;
     FirstRunDialog *firstRunDialog;
-    HelpDialog *helpDialog;
 
     bool save(int index);
     bool maybeSave(int index);
