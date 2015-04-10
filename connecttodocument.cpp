@@ -66,7 +66,7 @@ void ConnectToDocument::addInfo()
 
 void ConnectToDocument::readSettings()
 {
-    QSettings settings("Cahoots", "Connect Dialog");
+    QSettings settings("Kgp-Edit", "Connect Dialog");
     int length = settings.beginReadArray("infoList");
     for (int i = 0; i < length; ++i) {
         settings.setArrayIndex(i);
@@ -78,7 +78,7 @@ void ConnectToDocument::readSettings()
 
 void ConnectToDocument::writeSettings()
 {
-    QSettings settings("Cahoots", "Connect Dialog");
+    QSettings settings("Kgp-Edit", "Connect Dialog");
     settings.beginWriteArray("infoList");
     for (int i = 0; i < previousInfo.size(); ++i) {
         settings.setArrayIndex(i);

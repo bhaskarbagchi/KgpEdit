@@ -320,7 +320,7 @@ void Server::displayError(QAbstractSocket::SocketError socketError)
     case QAbstractSocket::RemoteHostClosedError:
         break;
     default:
-        QMessageBox::information(editor, tr("Cahoots"),
+        QMessageBox::information(editor, tr("Kgp-Edit"),
                                  tr("The following error occurred: %1.")
                                  .arg(sock->errorString()));
     }

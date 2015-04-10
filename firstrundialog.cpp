@@ -10,13 +10,6 @@ FirstRunDialog::FirstRunDialog(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(dialogAccepted()));
-//    if (Utilities::getSystem() == "Mac") {
-//        ui->labelPc->hide();
-//    }
-//    else {
-//        ui->labelMac->hide();
-//    }
-    ui->labelMac->hide();
 }
 
 FirstRunDialog::~FirstRunDialog()

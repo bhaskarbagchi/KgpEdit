@@ -245,19 +245,19 @@ void Client::displayError(QAbstractSocket::SocketError socketError)
     case QAbstractSocket::RemoteHostClosedError:
         break;
     case QAbstractSocket::HostNotFoundError:
-        QMessageBox::information(editor, tr("Cahoots"),
+        QMessageBox::information(editor, tr("Kgp-Edit"),
                                  tr("The host was not found. Please check the "
                                     "host name and port settings."));
         break;
     case QAbstractSocket::ConnectionRefusedError:
-        QMessageBox::information(editor, tr("Cahoots"),
+        QMessageBox::information(editor, tr("Kgp-Edit"),
                                  tr("The connection was refused. "
                                     "Make sure the server is running, "
                                     "and check that the host name and port "
                                     "settings are correct."));
         break;
     default:
-        QMessageBox::information(editor, tr("Cahoots"),
+        QMessageBox::information(editor, tr("Kgp-Edit"),
                                  tr("The following error occurred: %1.")
                                  .arg(socket->errorString()));
     }

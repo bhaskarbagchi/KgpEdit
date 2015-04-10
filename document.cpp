@@ -314,7 +314,7 @@ void Document::findPrev(QString searchString, Qt::CaseSensitivity sensitivity, b
 void Document::replaceAll(QString searchString, QString replaceString, Qt::CaseSensitivity sensitivity, Enu::FindMode mode)
 {
     if (!editor->replaceAll(searchString, replaceString, sensitivity, mode)) {
-        QMessageBox::information(editor, tr("Cahoots"), tr("The string was not found."));
+        QMessageBox::information(editor, tr("Kgp-Edit"), tr("The string was not found."));
     }
 }
 

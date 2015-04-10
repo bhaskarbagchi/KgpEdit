@@ -91,7 +91,7 @@ private slots:
     void on_actionWindow_Previous_Document_triggered();
 
     void on_actionHelp_How_to_Collaborate_triggered();
-    void on_actionHelp_About_Cahoots_triggered();
+    void on_actionHelp_About_KGPEdit_triggered();
     void on_actionHelp_About_Qt_triggered();
 
     void setUndoability(bool b);

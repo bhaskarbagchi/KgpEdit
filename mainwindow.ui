@@ -82,7 +82,7 @@
    <addaction name="actionEdit_Cut"/>
    <addaction name="actionEdit_Copy"/>
    <addaction name="actionEdit_Paste"/>
-   <addaction name="actionHelp_About_Cahoots"/>
+   <addaction name="actionHelp_About_KGPEdit"/>
    <addaction name="separator"/>
    <addaction name="actionTools_Announce_Document"/>
    <addaction name="separator"/>
@@ -413,7 +413,7 @@
     <string>Ctrl+F</string>
    </property>
   </action>
-  <action name="actionHelp_About_Cahoots">
+  <action name="actionHelp_About_KGPEdit">
    <property name="icon">
     <iconset resource="kgpeditresc.qrc">
      <normaloff>:/images/help.png</normaloff>:/images/help.png</iconset>

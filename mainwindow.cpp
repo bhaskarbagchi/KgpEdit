@@ -88,7 +88,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::readSettings()
 {
-    QSettings settings("Collab-edit", "MainWindow");
+    QSettings settings("Kgp-Edit", "MainWindow");
     QDesktopWidget *desktop = QApplication::desktop();
     int width = static_cast<int>(desktop->width() * 0.80);
     int height = static_cast<int>(desktop->height() * 0.70);
@@ -110,7 +110,7 @@ void MainWindow::readSettings()
 
 void MainWindow::writeSettings()
 {
-    QSettings settings("Collab-edit", "MainWindow");
+    QSettings settings("Kgp-Edit", "MainWindow");
     settings.setValue("pos", pos());
     settings.setValue("size", size());
     settings.setValue("name", preferencesDialog->getMyName());
@@ -503,7 +503,7 @@ void MainWindow::on_actionHelp_How_to_Collaborate_triggered()
     helpDialog->show();
 }
 
-void MainWindow::on_actionHelp_About_Cahoots_triggered()
+void MainWindow::on_actionHelp_About_KGPEdit_triggered()
 {
     aboutDialog->exec();
 }

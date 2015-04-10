@@ -8,7 +8,7 @@ QT += network \
 
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x000000
 # Windows RC file
-RC_FILE = cahootsresources.rc
+RC_FILE = kgpeditresc.qrc
 
 # Mac icon/plist
 ICON =
@@ -16,7 +16,6 @@ QMAKE_INFO_PLIST =
 SOURCES += main.cpp \
     mainwindow.cpp \
     document.cpp \
-    #highlighters/cpphighlighter.cpp \
     connecttodocument.cpp \
     finddialog.cpp \
     preferencesdialog.cpp \
@@ -28,14 +27,12 @@ SOURCES += main.cpp \
     server.cpp \
     chatbrowser.cpp \
     utilities.cpp \
-    #highlighters/pythonhighlighter.cpp \
     announcedocumentdialog.cpp \
     firstrundialog.cpp \
     aboutdialog.cpp \
     helpdialog.cpp
 HEADERS += mainwindow.h \
     document.h \
-    #highlighters/cpphighlighter.h \
     connecttodocument.h \
     finddialog.h \
     preferencesdialog.h \
@@ -48,7 +45,6 @@ HEADERS += mainwindow.h \
     server.h \
     chatbrowser.h \
     utilities.h \
-    #highlighters/pythonhighlighter.h \
     announcedocumentdialog.h \
     firstrundialog.h \
     aboutdialog.h \
@@ -66,6 +62,5 @@ FORMS += mainwindow.ui \
     aboutdialog.ui \
     helpdialog.ui
 RESOURCES += \
-    #highlighters.qrc \
     kgpeditresc.qrc
 OTHER_FILES +=
