@@ -346,7 +346,7 @@ void MainWindow::on_actionEdit_Paste_triggered()
 void MainWindow::on_actionTools_Announce_Document_triggered()
 {
     if (tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->docHasCollaborated()) {
-        return; // this SHOULD never happen, but just in case.
+        return;
     }
         announceDocumentDialog->show();
 }

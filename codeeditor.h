@@ -14,7 +14,6 @@ class QWidget;
 
 class LineNumberArea;
 
-
 class CodeEditor : public QPlainTextEdit
 {
     Q_OBJECT
@@ -26,8 +25,6 @@ public:
     int lineNumberAreaWidth();
 
     void collabTextChange(int pos, int charsRemoved, int charsAdded, QString data);
-
-    void unCommentSelection();
 
 protected:
     void resizeEvent(QResizeEvent *event);

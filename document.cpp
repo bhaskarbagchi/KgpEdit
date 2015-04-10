@@ -220,11 +220,6 @@ void Document::setChatHidden(bool b)
     }
 }
 
-void Document::unCommentSelection()
-{
-    editor->unCommentSelection();
-}
-
 void Document::resynchronizeTriggered()
 {
     if (server) {

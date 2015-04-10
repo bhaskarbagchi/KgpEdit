@@ -43,8 +43,6 @@ public:
     void setParticipantsHidden(bool b);
     // shows/hides the chat pane
     void setChatHidden(bool b);
-    // C++ style (un)commenting
-    void unCommentSelection();
 
     // User wants to resynchronize the document with the owner
     void resynchronizeTriggered();
