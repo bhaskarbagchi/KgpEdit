@@ -9,8 +9,6 @@
 #include <QTextCodec>
 #include <QtWidgets/QFontDialog>
 #include <QTextDocument>
-#include <QPrinter>
-#include <QPrintDialog>
 #include <QDebug>
 #include <QCloseEvent>
 #include <QDesktopWidget>
