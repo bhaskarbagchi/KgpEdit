@@ -49,10 +49,6 @@ public:
     // User wants to resynchronize the document with the owner
     void resynchronizeTriggered();
 
-    // Sets the highlighting style to the below Highlighter
-    void setHighlighter(int Highlighter);
-    enum Highlighter {None, CPlusPlus, Python};
-
     // returns if the editor is undable
     bool isUndoable();
     // returns if the editor is redoable

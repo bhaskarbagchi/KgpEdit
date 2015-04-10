@@ -39,9 +39,6 @@ Document::Document(QWidget *parent) :
     bottomEditor->setDocument(editor->document());
     bottomEditor->hide();
 
-    // editor highlighter
-    // highlighter = new CppHighlighter(editor->document());
-
     // Participant frame
     delete ui->participantFrame;
     participantPane = new ParticipantsPane();
@@ -237,9 +234,6 @@ void Document::resynchronizeTriggered()
         client->resynchronize();
     }
 }
-
-void Document::setHighlighter(int Highlighter)
-{}
 
 bool Document::isUndoable()
 {

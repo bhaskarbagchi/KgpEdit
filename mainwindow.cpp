@@ -100,7 +100,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 bool MainWindow::eventFilter(QObject *, QEvent *event)
 {
     if (event->type() == QEvent::FileOpen) {
-        QString fileName = static_cast<QFileOpenEvent *>(event)->file(); // for the sake of mirroring code in our open slot
+        QString fileName = static_cast<QFileOpenEvent *>(event)->file();
         if (!fileName.isEmpty()) {
 
             int index = ui->tabWidget->addTab(new QWidget(), QFileInfo(fileName).fileName());
@@ -133,7 +133,6 @@ bool MainWindow::eventFilter(QObject *, QEvent *event)
     return false;
 }
 
-// Save methods
 bool MainWindow::save(int index)
 {
     if (tabWidgetToDocumentMap.value(ui->tabWidget->widget(index))->curFile.isEmpty()) {
@@ -149,7 +148,7 @@ bool MainWindow::maybeSave(int index)
     if (tabWidgetToDocumentMap.value(ui->tabWidget->widget(index))->isModified()) {
         ui->tabWidget->setCurrentIndex(index);
         QMessageBox::StandardButton ret;
-        ret = QMessageBox::warning(this, "Collab-edit",
+        ret = QMessageBox::warning(this, "Kgp-edit",
                                    "The document has been modified.\n"
                                    "Do you want to save your changes?",
                                    QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
@@ -165,7 +164,7 @@ bool MainWindow::saveFile(const QString &fileName)
 {
     QFile file(fileName);
     if (!file.open(QFile::WriteOnly | QFile::Text)) {
-        QMessageBox::warning(this, tr("Application"),
+        QMessageBox::warning(this, tr("Kgp-edit"),
                              tr("Cannot write file %1:\n%2.")
                              .arg(fileName)
                              .arg(file.errorString()));
@@ -187,7 +186,7 @@ void MainWindow::loadFile(const QString &fileName)
 {
      QFile file(fileName);
      if (!file.open(QFile::ReadOnly | QFile::Text)) {
-         QMessageBox::warning(this, tr("Application"),
+         QMessageBox::warning(this, tr("Kgp-edit"),
                               tr("Cannot read file %1:\n%2.")
                               .arg(fileName)
                               .arg(file.errorString()));
@@ -201,13 +200,6 @@ void MainWindow::loadFile(const QString &fileName)
      QApplication::restoreOverrideCursor();
 
      setCurrentFile(fileName);
-
-     if (fileName.endsWith(".py")) {
-         tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->setHighlighter(Document::Python);
-     }
-     else if (fileName.endsWith(".cpp") || fileName.endsWith(".c") || fileName.endsWith(".h") || fileName.endsWith(".hpp")) {
-         tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->setHighlighter(Document::CPlusPlus);
-     }
      statusBar()->showMessage("File loaded", 4000);
 }
 
