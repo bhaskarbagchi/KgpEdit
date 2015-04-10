@@ -231,6 +231,7 @@ void Client::onNewConnection()
     connect(socket, SIGNAL(readyRead()), this, SLOT(onIncomingData()));
     QString toSend = QString("helo:%1").arg(myName);
     writeToServer(toSend);
+    this->resynchronize();
 }
 
 void Client::disconnected()

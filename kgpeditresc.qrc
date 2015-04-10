@@ -12,5 +12,6 @@
         <file>images/kgpediticon.png</file>
         <file>images/kgpeditsplash.png</file>
         <file>images/icon.png</file>
+        <file>images/open.png</file>
     </qresource>
 </RCC>

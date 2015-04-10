@@ -76,6 +76,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionFile_New"/>
+   <addaction name="actionFile_Open"/>
    <addaction name="actionFile_Save"/>
    <addaction name="actionEdit_Undo"/>
    <addaction name="actionEdit_Redo"/>
@@ -91,7 +92,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionFile_Open">
    <property name="icon">
-    <iconset>
+    <iconset resource="kgpeditresc.qrc">
      <normaloff>:/images/open.png</normaloff>:/images/open.png</iconset>
    </property>
    <property name="text">
