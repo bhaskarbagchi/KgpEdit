@@ -46,7 +46,8 @@ ParticipantsPane::ParticipantsPane(QWidget *parent) :
     roItem = ui->treeWidget->topLevelItem(1);
     waitItem = ui->treeWidget->topLevelItem(2);
     owner = rwItem->child(0);
-
+    ui->promotePushButton->hide();
+    ui->demotePushButton->hide();
 //    ui->connectInfoLabel->setFont(QFont(Utilities::labelFont, Utilities::labelFontSize));
 //    ui->participantsLabel->setFont(QFont(Utilities::labelFont, Utilities::labelFontSize));
 //    ui->promotePushButton->setFont(QFont(Utilities::labelFont, Utilities::labelFontSize));
@@ -80,9 +81,10 @@ void ParticipantsPane::newParticipant(QTcpSocket *socket)
     participantMap.insert(socket, participant);
 
     participant->socket = socket;
-    participant->permissions = Enu::Waiting;
+    participant->permissions = Enu::ReadWrite;
     participant->socket = socket;
     participant->address = socket->peerAddress();
+    emit memberPermissionsChanged(participant->socket, "write");
 
     // Initializes the incoming block size to 0
     participant->blockSize = 0;
@@ -104,7 +106,7 @@ bool ParticipantsPane::addParticipant(QString name, QTcpSocket *socket)
     }
     participant->name = name;
     // This person is now ready to be added to the permissions tree view
-    participant->item = new QTreeWidgetItem(waitItem);
+    participant->item = new QTreeWidgetItem(rwItem);
     participant->item->setText(0, name);
 
     participant->color = QColor::fromHsv(qrand() % 256, 190, 190);
@@ -144,18 +146,18 @@ void ParticipantsPane::newParticipant(QString name, QString address, QString per
     // everyone has their own colors - colors aren't consistent across participants
     participant->color = QColor::fromHsv(qrand() % 256, 190, 190);
 
-    if (permissions == "waiting") {
-        participant->item = new QTreeWidgetItem(waitItem);
-        participant->permissions = Enu::Waiting;
-    }
-    else if (permissions == "read") {
-        participant->item = new QTreeWidgetItem(roItem);
-        participant->permissions = Enu::ReadOnly;
-    }
-    else if (permissions == "write") {
+//    if (permissions == "waiting") {
+//        participant->item = new QTreeWidgetItem(waitItem);
+//        participant->permissions = Enu::Waiting;
+//    }
+//    else if (permissions == "read") {
+//        participant->item = new QTreeWidgetItem(roItem);
+//        participant->permissions = Enu::ReadOnly;
+//    }
+//    else if (permissions == "write") {
         participant->item = new QTreeWidgetItem(rwItem);
         participant->permissions = Enu::ReadWrite;
-    }
+//    }
     participant->item->setText(0, name);
     participant->item->setBackgroundColor(1, participant->color);
     participant->item->setToolTip(0, name + "@" + address);
@@ -206,18 +208,18 @@ void ParticipantsPane::setParticipantPermissions(QString name, QString address, 
             Participant *participant = participantList.at(i);
             participant->item->parent()->removeChild(participant->item);
 
-            if (permissions == "waiting") {
-                waitItem->addChild(participant->item);
-                participant->permissions = Enu::Waiting;
-            }
-            else if (permissions == "read") {
-                roItem->addChild(participant->item);
-                participant->permissions = Enu::ReadOnly;
-            }
-            else if (permissions == "write") {
+//            if (permissions == "waiting") {
+//                waitItem->addChild(participant->item);
+//                participant->permissions = Enu::Waiting;
+//            }
+//            else if (permissions == "read") {
+//                roItem->addChild(participant->item);
+//                participant->permissions = Enu::ReadOnly;
+//            }
+//            else if (permissions == "write") {
                 rwItem->addChild(participant->item);
                 participant->permissions = Enu::ReadWrite;
-            }
+//            }
         }
     }
 }
@@ -296,6 +298,7 @@ void ParticipantsPane::on_promotePushButton_clicked()
                 rwItem->insertChild(0, participantList.at(i)->item);
                 participantList.at(i)->permissions = Enu::ReadWrite;
                 permissions = "write";
+               // emit memberPermissionsChanged(participantList.at(i)->socket, permissions);
             }
             else if (participantList.at(i)->permissions == Enu::Waiting) {
                 waitItem->removeChild(participantList.at(i)->item);
