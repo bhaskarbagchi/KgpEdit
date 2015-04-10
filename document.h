@@ -2,8 +2,6 @@
 #define DOCUMENT_H
 
 #include <QtWidgets/QWidget>
-#include "highlighters/cpphighlighter.h"
-#include "highlighters/pythonhighlighter.h"
 #include "codeeditor.h"
 /*
     Cahoots is a crossplatform real-time collaborative text editor.
@@ -133,8 +131,6 @@ private:
 
     Client *client;
     Server *server;
-
-    QSyntaxHighlighter *highlighter;
 
     CodeEditor *editor;
     CodeEditor *bottomEditor;

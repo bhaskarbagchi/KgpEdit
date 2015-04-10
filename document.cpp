@@ -60,8 +60,6 @@ Document::Document(QWidget *parent) :
     // editor highlighter
     // highlighter = new CppHighlighter(editor->document());
 
-    highlighter = NULL;
-
     // Participant frame
     delete ui->participantFrame;
     participantPane = new ParticipantsPane();
@@ -284,30 +282,7 @@ void Document::resynchronizeTriggered()
 }
 
 void Document::setHighlighter(int Highlighter)
-{
-    switch (Highlighter) {
-    case None:
-        delete highlighter;
-        highlighter = NULL;
-        break;
-//    case CPlusPlus:
-//        if (highlighter) {
-//            delete highlighter;
-//            highlighter = NULL;
-//        }
-//        highlighter = new CppHighlighter(editor->document());
-//        break;
-//    case Python:
-//        if (highlighter) {
-//            delete highlighter;
-//            highlighter = NULL;
-//        }
-//        highlighter = new PythonHighlighter(editor->document());
-//        break;
-    default:
-        break;
-    }
-}
+{}
 
 bool Document::isUndoable()
 {
