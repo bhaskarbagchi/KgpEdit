@@ -33,6 +33,8 @@ ParticipantsPane::ParticipantsPane(QWidget *parent) :
     ui(new Ui::ParticipantsPane)
 {
     ui->setupUi(this);
+    ui->promotePushButton->hide();
+    ui->demotePushButton->hide();
 
     connect(ui->treeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
             this, SLOT(onCurrentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
@@ -274,6 +276,7 @@ void ParticipantsPane::onCurrentItemChanged(QTreeWidgetItem *item, QTreeWidgetIt
 
 void ParticipantsPane::on_promotePushButton_clicked()
 {
+
     QList<QTreeWidgetItem*> selectedItems = ui->treeWidget->selectedItems();
     // find the currently selected item in the participants list
 
