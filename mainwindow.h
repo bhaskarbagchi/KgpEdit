@@ -60,17 +60,10 @@ private slots:
     void on_actionEdit_Copy_triggered();
     void on_actionEdit_Paste_triggered();
 
-    void on_actionView_Line_Wrap_triggered();
-    void on_actionView_Hide_Show_Participants_triggered();
-    void on_actionView_Hide_Show_Chat_triggered();
-
     void on_actionTools_Announce_Document_triggered();
     void on_actionTools_Connect_to_Document_triggered();
     void on_actionTools_Resynchronize_Document_triggered();
 
-    void on_actionWindow_Split_triggered();
-    void on_actionWindow_Split_Side_by_Side_triggered();
-    void on_actionWindow_Remove_Split_triggered();
     void on_actionWindow_Next_Document_triggered();
     void on_actionWindow_Previous_Document_triggered();
 

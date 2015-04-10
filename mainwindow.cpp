@@ -351,32 +351,6 @@ void MainWindow::on_actionEdit_Paste_triggered()
     tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->paste();
 }
 
-void MainWindow::on_actionView_Line_Wrap_triggered()
-{
-    tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->toggleLineWrap();
-}
-
-void MainWindow::on_actionView_Hide_Show_Participants_triggered()
-{
-
-    if (tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->isParticipantsHidden()) {
-        tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->setParticipantsHidden(false);
-    }
-    else {
-        tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->setParticipantsHidden(true);
-    }
-}
-
-void MainWindow::on_actionView_Hide_Show_Chat_triggered()
-{
-    if (tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->isChatHidden()) {
-        tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->setChatHidden(false);
-    }
-    else {
-        tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->setChatHidden(true);
-    }
-}
-
 void MainWindow::on_actionTools_Announce_Document_triggered()
 {
     if (tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->docHasCollaborated()) {
@@ -400,31 +374,6 @@ void MainWindow::on_actionTools_Connect_to_Document_triggered()
 void MainWindow::on_actionTools_Resynchronize_Document_triggered()
 {
     tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->resynchronizeTriggered();
-}
-
-void MainWindow::on_actionWindow_Split_triggered()
-{
-    tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->splitEditor();
-    ui->actionWindow_Split->setDisabled(true);
-    ui->actionWindow_Split_Side_by_Side->setDisabled(false);
-    ui->actionWindow_Remove_Split->setEnabled(true);
-}
-
-void MainWindow::on_actionWindow_Split_Side_by_Side_triggered()
-{
-    tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->splitEditorSideBySide();
-    ui->actionWindow_Split->setDisabled(false);
-    ui->actionWindow_Split_Side_by_Side->setDisabled(true);
-    ui->actionWindow_Remove_Split->setEnabled(true);
-
-}
-
-void MainWindow::on_actionWindow_Remove_Split_triggered()
-{
-    ui->actionWindow_Split->setDisabled(false);
-    ui->actionWindow_Split_Side_by_Side->setDisabled(false);
-    ui->actionWindow_Remove_Split->setEnabled(false);
-    tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->unSplitEditor();
 }
 
 void MainWindow::on_actionWindow_Next_Document_triggered()
