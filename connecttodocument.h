@@ -58,7 +58,6 @@ private:
 
 private slots:
     void dialogAccepted();
-    void on_previousDocsComboBox_currentIndexChanged();
     void processPendingDatagrams();
     void timerTimedOut();
     void listWidgetItemClicked(QListWidgetItem *current);

@@ -10,7 +10,6 @@ QT += network \
     webkitwidgets
 
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x000000
-
 # Windows RC file
 RC_FILE = cahootsresources.rc
 

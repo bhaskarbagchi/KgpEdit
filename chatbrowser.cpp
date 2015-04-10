@@ -45,11 +45,4 @@ void ChatBrowser::addChatLine(QString str, QColor color)
     }
     append(str);
     return;
-#warning "implement, would be nice to have colors mean something in the chat pane."
-    QTextCursor cursor = QTextCursor(this->document());
-    cursor.setPosition(this->document()->lastBlock().position());
-    cursor.select(QTextCursor::LineUnderCursor);
-    QTextCharFormat format;
-    (void)format;
-    (void)color;
 }

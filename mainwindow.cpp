@@ -251,8 +251,6 @@ void MainWindow::setCurrentFile(const QString &fileName)
 {
      tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->curFile = fileName;
      tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->setModified(false);
-#warning "mechanic for showing if a document is modified"
-//     setWindowModified(false); // Possible future mechanic for showing in the title bar if the document isModified
 
      QString shownName;
      if (tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->curFile.isEmpty())
