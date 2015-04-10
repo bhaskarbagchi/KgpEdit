@@ -92,7 +92,7 @@
         </font>
        </property>
        <property name="text">
-        <string>This doc is available on the mentioned IP address and port number</string>
+        <string>This doc will be available at the displayed IP address and port</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>

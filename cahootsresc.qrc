@@ -13,5 +13,6 @@
         <file>images/undo.png</file>
         <file>images/cahootsicon.png</file>
         <file>images/cahootssplash.png</file>
+        <file>images/icon.png</file>
     </qresource>
 </RCC>

@@ -1,7 +1,7 @@
 # -------------------------------------------------
 # Project created by QtCreator 2009-09-14T19:31:57
 # -------------------------------------------------
-TARGET = Collab-edit
+TARGET = Kgp-edit
 TEMPLATE = app
 CONFIG += x86 ppc
 QT += network \
