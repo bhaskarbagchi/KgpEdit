@@ -30,8 +30,6 @@ public:
     ParticipantsPane(QWidget *parent = 0);
     ~ParticipantsPane();
 
-    void setOwnership(bool isOwner);
-
     void setConnectInfo(QString address, QString port);
 
     // Participants are first new'd (prior to greetings)
@@ -75,9 +73,6 @@ private:
     QTreeWidgetItem *owner;
 
 private slots:
-    void onCurrentItemChanged(QTreeWidgetItem *item, QTreeWidgetItem *);
-    void on_promotePushButton_clicked();
-    void on_demotePushButton_clicked();
 
 signals:
     void memberCanNowRead(QTcpSocket *member);

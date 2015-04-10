@@ -121,26 +121,6 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="promotePushButton">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="text">
-      <string>Promote</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="demotePushButton">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="text">
-      <string>Demote</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="Line" name="line">
      <property name="minimumSize">
       <size>

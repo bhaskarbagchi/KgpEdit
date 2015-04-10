@@ -103,7 +103,6 @@ void Document::connectToDocument(QStringList list)
     QString portString = list.at(2);
 
     int port = portString.toInt();
-    participantPane->setOwnership(false);
     startedCollaborating = true;
 
     setChatHidden(false);
