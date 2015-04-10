@@ -5,7 +5,6 @@
 #include "document.h"
 #include "connecttodocument.h"
 #include "announcedocumentdialog.h"
-#include "aboutdialog.h"
 #include "firstrundialog.h"
 #include "preferencesdialog.h"
 
@@ -31,7 +30,6 @@ private:
     ConnectToDocument *connectDialog;
     AnnounceDocumentDialog *announceDocumentDialog;
     PreferencesDialog *preferencesDialog;
-    AboutDialog *aboutDialog;
     FirstRunDialog *firstRunDialog;
 
     bool save(int index);

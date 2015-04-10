@@ -62,8 +62,6 @@ MainWindow::MainWindow(QWidget *parent)
     readSettings();
     openPath = QDir::homePath();
 
-    aboutDialog = new AboutDialog(this);
-
     qApp->installEventFilter(this);
 }
 
@@ -417,7 +415,7 @@ void MainWindow::on_actionTools_Announce_Document_triggered()
 
 void MainWindow::on_actionHelp_About_KGPEdit_triggered()
 {
-    aboutDialog->exec();
+    firstRunDialog->exec();
 }
 
 void MainWindow::on_actionTools_Connect_to_Document_triggered()
