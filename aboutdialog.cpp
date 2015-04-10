@@ -27,14 +27,6 @@ AboutDialog::AboutDialog(QWidget *parent) :
     ui(new Ui::AboutDialog)
 {
     ui->setupUi(this);
-
-//    if (Utilities::getSystem() == "Mac") {
-//        ui->labelPc->hide();
-//    }
-//    else {
-//        ui->labelMac->hide();
-//    }
-  ui->labelPc->hide();
 }
 
 AboutDialog::~AboutDialog()
