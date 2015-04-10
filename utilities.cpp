@@ -12,20 +12,5 @@ const int Utilities::chatFontSize = getSystem() == "Mac" ? 11 : 8;
 
 QString Utilities::getSystem() {
     return QString("Linux");
-//    #ifdef Q_WS_X11
-//    return QString("Linux");
-//    #endif
-
-//    #ifdef Q_WS_MAC
-//    return QString("Mac");
-//    #endif
-
-//    #ifdef Q_WS_QWS
-//    return QString("Embedded Linux");
-//    #endif
-
-//    #ifdef Q_WS_WIN
-//    return QString("Windows");
-//    #endif
 }
 
