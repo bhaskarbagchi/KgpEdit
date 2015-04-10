@@ -27,30 +27,15 @@ MainWindow::MainWindow(QWidget *parent)
     connectDialog = new ConnectToDocument(this);
     connect(connectDialog, SIGNAL(connectToDocumentClicked(QStringList)), this, SLOT(connectToDocument(QStringList)));
 
-    preferencesDialog = new PreferencesDialog(this);
-    connect(preferencesDialog, SIGNAL(setEditorFont(QFont)), this, SLOT(setEditorFont(QFont)));
-    connect(preferencesDialog, SIGNAL(setChatFont(QFont)), this, SLOT(setChatFont(QFont)));
-    connect(preferencesDialog, SIGNAL(setParticipantsFont(QFont)), this, SLOT(setParticipantsFont(QFont)));
-
     announceDocumentDialog = new AnnounceDocumentDialog(this);
     connect(announceDocumentDialog, SIGNAL(announceDocument(QString,Qt::CheckState,Qt::CheckState)),
             this, SLOT(announceDocument(QString,Qt::CheckState,Qt::CheckState)));
-
-    // sets the announce dialog to the state of the preferences pane
-    announceDocumentDialog->setAnnounceDialogInfo(preferencesDialog->getMyName(), preferencesDialog->getAlwaysUseMyName());
-
-    // Connects the pref dialog to the announce dialog for when information is changed in the preferences dialog
-    connect(preferencesDialog, SIGNAL(setAnnounceDialogInfo(QString,bool)), announceDocumentDialog, SLOT(setAnnounceDialogInfo(QString,bool)));
 
     Document *document = new Document(ui->tab);
     QGridLayout *tabLayout = new QGridLayout;
     tabLayout->addWidget(document);
     tabLayout->setContentsMargins(0,0,0,0);
     ui->tabWidget->widget(0)->setLayout(tabLayout);
-
-    document->setEditorFont(preferencesDialog->getEditorFont());
-    document->setChatFont(preferencesDialog->getChatFont());
-    document->setParticipantsFont(preferencesDialog->getParticipantsFont());
 
     tabWidgetToDocumentMap.insert(ui->tabWidget->currentWidget(), document);
 
@@ -94,7 +79,6 @@ void MainWindow::writeSettings()
     QSettings settings("Kgp-Edit", "MainWindow");
     settings.setValue("pos", pos());
     settings.setValue("size", size());
-    settings.setValue("name", preferencesDialog->getMyName());
 }
 
 // Protected closeEvent
@@ -257,10 +241,6 @@ void MainWindow::on_actionFile_New_triggered()
     tabLayout->setContentsMargins(0,0,0,0);
     ui->tabWidget->widget(index)->setLayout(tabLayout);
 
-    document->setEditorFont(preferencesDialog->getEditorFont());
-    document->setChatFont(preferencesDialog->getChatFont());
-    document->setParticipantsFont(preferencesDialog->getParticipantsFont());
-
     tabWidgetToDocumentMap.insert(ui->tabWidget->widget(index), document);
 
     connect(document, SIGNAL(undoAvailable(bool)), this, SLOT(setUndoability(bool)));
@@ -402,13 +382,7 @@ void MainWindow::on_actionTools_Announce_Document_triggered()
     if (tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->docHasCollaborated()) {
         return; // this SHOULD never happen, but just in case.
     }
-//    if (preferencesDialog->getAlwaysUseMyName() && preferencesDialog->getMyName() != "") {
-//        tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->announceDocument(announceDocumentDialog->isBroadcastingChecked());
-//        tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->setOwnerName(preferencesDialog->getMyName());
-//    }
-//    else {
         announceDocumentDialog->show();
- //   }
 }
 
 void MainWindow::on_actionHelp_About_KGPEdit_triggered()
@@ -426,11 +400,6 @@ void MainWindow::on_actionTools_Connect_to_Document_triggered()
 void MainWindow::on_actionTools_Resynchronize_Document_triggered()
 {
     tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->resynchronizeTriggered();
-}
-
-void MainWindow::on_actionTools_Preferences_triggered()
-{
-    preferencesDialog->show();
 }
 
 void MainWindow::on_actionWindow_Split_triggered()
@@ -535,14 +504,6 @@ void MainWindow::announceDocument(QString ownerName, Qt::CheckState broadcastChe
     tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->announceDocument(broadcastCheckState == Qt::Checked);
     tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->setOwnerName(ownerName);
     ui->actionTools_Announce_Document->setEnabled(false);
-
-    if (alwaysUserNameCheckState == Qt::Checked) {
-        preferencesDialog->setAlwaysUseMyName(true);
-        preferencesDialog->setMyName(ownerName);
-    }
-    else {
-        preferencesDialog->setAlwaysUseMyName(true);
-    }
 }
 
 void MainWindow::setEditorFont(QFont font)

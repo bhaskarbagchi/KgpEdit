@@ -6,7 +6,6 @@
 #include "connecttodocument.h"
 #include "announcedocumentdialog.h"
 #include "firstrundialog.h"
-#include "preferencesdialog.h"
 
 #include <QSettings>
 
@@ -29,7 +28,6 @@ private:
     QString openPath;
     ConnectToDocument *connectDialog;
     AnnounceDocumentDialog *announceDocumentDialog;
-    PreferencesDialog *preferencesDialog;
     FirstRunDialog *firstRunDialog;
 
     bool save(int index);
@@ -69,7 +67,6 @@ private slots:
     void on_actionTools_Announce_Document_triggered();
     void on_actionTools_Connect_to_Document_triggered();
     void on_actionTools_Resynchronize_Document_triggered();
-    void on_actionTools_Preferences_triggered();
 
     void on_actionWindow_Split_triggered();
     void on_actionWindow_Split_Side_by_Side_triggered();

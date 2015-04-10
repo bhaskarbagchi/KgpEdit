@@ -326,11 +326,6 @@
     <string>Split Side by Side</string>
    </property>
   </action>
-  <action name="actionTools_Preferences">
-   <property name="text">
-    <string>Preferences</string>
-   </property>
-  </action>
   <action name="actionHelp_About_KGPEdit">
    <property name="icon">
     <iconset resource="kgpeditresc.qrc">

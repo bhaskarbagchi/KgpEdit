@@ -3,7 +3,6 @@ TEMPLATE = app
 CONFIG += x86 ppc
 QT += network \
     webkit  \
-    printsupport    \
     webkitwidgets
 
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x000000
@@ -17,7 +16,6 @@ SOURCES += main.cpp \
     mainwindow.cpp \
     document.cpp \
     connecttodocument.cpp \
-    preferencesdialog.cpp \
     codeeditor.cpp \
     participantspane.cpp \
     chatpane.cpp \
@@ -30,7 +28,6 @@ SOURCES += main.cpp \
 HEADERS += mainwindow.h \
     document.h \
     connecttodocument.h \
-    preferencesdialog.h \
     codeeditor.h \
     participantspane.h \
     chatpane.h \
@@ -44,7 +41,6 @@ HEADERS += mainwindow.h \
 FORMS += mainwindow.ui \
     document.ui \
     connecttodocument.ui \
-    preferencesdialog.ui \
     participantspane.ui \
     chatpane.ui \
     announcedocumentdialog.ui \
