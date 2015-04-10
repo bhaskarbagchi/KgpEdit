@@ -6,7 +6,6 @@
 #include "participantspane.h"
 #include "chatpane.h"
 #include "enu.h"
-#include "findtoolbar.h"
 
 #include "client.h"
 #include "server.h"
@@ -68,14 +67,6 @@ public:
     // returns if the participants pane is hidden, used for determining which actions to enable/disable in the MW
     bool isParticipantsHidden();
 
-    // Find functions
-    void findAll();
-    void findNext(QString searchString, Qt::CaseSensitivity sensitivity, bool wrapAround, Enu::FindMode mode);
-    void findPrev(QString searchString, Qt::CaseSensitivity sensitivity, bool wrapAround, Enu::FindMode mode);
-    void replaceAll(QString searchString, QString replaceString, Qt::CaseSensitivity sensitivity,Enu::FindMode mode);
-    void replace(QString replaceString);
-    void findReplace(QString searchString, QString replaceString, Qt::CaseSensitivity sensitivity, bool wrapAround, Enu::FindMode mode);
-
     QString getPlainText();
     void setPlainText(QString text);
 
@@ -114,14 +105,8 @@ private:
     CodeEditor *bottomEditor;
     bool startedCollaborating;
 
-    FindToolBar *findAllToolbar;
     ParticipantsPane *participantPane;
     ChatPane *chatPane;
-
-private slots:
-    // triggered by the find toolbar, not the dialog
-    void findNext(QString string);
-    void findPrevious(QString string);
 
 signals:
     void redoAvailable(bool);

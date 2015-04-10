@@ -52,16 +52,6 @@ Document::Document(QWidget *parent) :
     chatPane = new ChatPane();
     ui->codeChatSplitter->insertWidget(1, chatPane);
 
-    // Find all toolbar widget
-    delete ui->findAllFrame;
-    findAllToolbar = new FindToolBar(this);
-    ui->editorVerticalLayout->insertWidget(1, findAllToolbar);
-    findAllToolbar->hide();
-
-    connect(findAllToolbar, SIGNAL(findAll(QString)), editor, SLOT(findAll(QString)));
-    connect(findAllToolbar, SIGNAL(findNext(QString)), this, SLOT(findNext(QString)));
-    connect(findAllToolbar, SIGNAL(findPrevious(QString)), this, SLOT(findPrevious(QString)));
-
     // Emit signals to the mainwindow when redoability/undoability changes
     connect(editor, SIGNAL(undoAvailable(bool)), this, SIGNAL(undoAvailable(bool)));
     connect(editor, SIGNAL(redoAvailable(bool)), this, SIGNAL(redoAvailable(bool)));
@@ -281,47 +271,6 @@ bool Document::isParticipantsHidden()
     return ui->participantSplitter->widget(1)->isHidden();
 }
 
-void Document::findAll()
-{
-    findAllToolbar->show();
-    findAllToolbar->giveFocus();
-}
-
-void Document::findNext(QString searchString, Qt::CaseSensitivity sensitivity, bool wrapAround, Enu::FindMode mode)
-{
-    if (!editor->findNext(searchString, sensitivity, wrapAround, mode)) {
-        emit notFound();
-    }
-}
-
-void Document::findPrev(QString searchString, Qt::CaseSensitivity sensitivity, bool wrapAround, Enu::FindMode mode)
-{
-    if (!editor->findPrev(searchString, sensitivity, wrapAround, mode)) {
-        emit notFound();
-    }
-}
-
-void Document::replaceAll(QString searchString, QString replaceString, Qt::CaseSensitivity sensitivity, Enu::FindMode mode)
-{
-    if (!editor->replaceAll(searchString, replaceString, sensitivity, mode)) {
-        QMessageBox::information(editor, tr("Kgp-Edit"), tr("The string was not found."));
-    }
-}
-
-void Document::replace(QString replaceString)
-{
-    if (!editor->replace(replaceString)) {
-        emit notFound();
-    }
-}
-
-void Document::findReplace(QString searchString, QString replaceString, Qt::CaseSensitivity sensitivity, bool wrapAround, Enu::FindMode mode)
-{
-    if (!editor->findReplace(searchString, replaceString, sensitivity, wrapAround, mode)) {
-        emit notFound();
-    }
-}
-
 QString Document::getPlainText()
 {
     return editor->toPlainText();
@@ -396,16 +345,6 @@ bool Document::isEditorSplit()
 bool Document::isEditorSplitSideBySide()
 {
     return ui->editorSplitter->orientation() == Qt::Horizontal;
-}
-
-void Document::findNext(QString string)
-{
-    editor->findNext(string, Qt::CaseInsensitive, true, Enu::Contains);
-}
-
-void Document::findPrevious(QString string)
-{
-    editor->findPrev(string, Qt::CaseInsensitive, true, Enu::Contains);
 }
 
 void Document::setOwnerName(QString name)

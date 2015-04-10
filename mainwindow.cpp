@@ -29,18 +29,6 @@ MainWindow::MainWindow(QWidget *parent)
     connectDialog = new ConnectToDocument(this);
     connect(connectDialog, SIGNAL(connectToDocumentClicked(QStringList)), this, SLOT(connectToDocument(QStringList)));
 
-    findDialog = new FindDialog(this);
-    connect(findDialog, SIGNAL(findDialogFindNext(QString,Qt::CaseSensitivity,bool,Enu::FindMode)), this,
-            SLOT(findNextTriggered(QString,Qt::CaseSensitivity,bool,Enu::FindMode)));
-    connect(findDialog, SIGNAL(findDialogFindPrev(QString,Qt::CaseSensitivity,bool,Enu::FindMode)), this,
-            SLOT(findPrevTriggered(QString,Qt::CaseSensitivity,bool,Enu::FindMode)));
-    connect(findDialog, SIGNAL(findDialogReplaceAll(QString,QString,Qt::CaseSensitivity,Enu::FindMode)), this,
-            SLOT(replaceAllTriggered(QString,QString,Qt::CaseSensitivity,Enu::FindMode)));
-    connect(findDialog, SIGNAL(findDialogReplace(QString)), this,
-            SLOT(replaceTriggered(QString)));
-    connect(findDialog, SIGNAL(findDiaalogFindReplace(QString,QString,Qt::CaseSensitivity,bool,Enu::FindMode)), this,
-            SLOT(findReplaceTriggered(QString,QString,Qt::CaseSensitivity,bool,Enu::FindMode)));
-
     preferencesDialog = new PreferencesDialog(this);
     connect(preferencesDialog, SIGNAL(setEditorFont(QFont)), this, SLOT(setEditorFont(QFont)));
     connect(preferencesDialog, SIGNAL(setChatFont(QFont)), this, SLOT(setChatFont(QFont)));
@@ -356,49 +344,6 @@ bool MainWindow::on_actionFile_Save_As_triggered()
     return saveFile(fileName);
 }
 
-bool MainWindow::on_actionFile_Save_A_Copy_As_triggered()
-{
-    QString fileName = QFileDialog::getSaveFileName(
-            this,
-            "Save A Copy As...",
-            tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->curFile.isEmpty() ?
-                QDir::homePath() + "/untitled.txt" :
-                tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->curFile,
-            "Text (*.txt)");
-    if (fileName.isEmpty())
-        return false;
-
-    QFile file(fileName);
-    if (!file.open(QFile::WriteOnly | QFile::Text)) {
-        QMessageBox::warning(this, tr("Application"),
-                             tr("Cannot write file %1:\n%2.")
-                             .arg(fileName)
-                             .arg(file.errorString()));
-        return false;
-    }
-
-    QTextStream out(&file);
-    out.setCodec(QTextCodec::codecForName("ISO 8859-1"));
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-    out << tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->getPlainText();
-    QApplication::restoreOverrideCursor();
-
-    statusBar()->showMessage("File saved as a copy", 4000);
-    return true;
-}
-
-bool MainWindow::on_actionFile_Save_All_triggered()
-{
-    bool isAllSaved = false;
-    QWidget *originalWidget = ui->tabWidget->currentWidget();
-    for (int i = 0; i < tabWidgetToDocumentMap.size(); i++)
-    {
-        ui->tabWidget->setCurrentIndex(i);
-        isAllSaved += on_actionFile_Save_triggered();
-    }
-    ui->tabWidget->setCurrentWidget(originalWidget);
-    return isAllSaved;
-}
 
 void MainWindow::on_actionFile_Close_triggered()
 {
@@ -406,20 +351,6 @@ void MainWindow::on_actionFile_Close_triggered()
 
     ui->actionWindow_Next_Document->setEnabled(ui->tabWidget->count() > 1);
     ui->actionWindow_Previous_Document->setEnabled(ui->tabWidget->count() > 1);
-}
-
-void MainWindow::on_actionFile_Print_triggered()
-{
-    QTextDocument document(tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->getPlainText(), this);
-    document.setDefaultFont(QFont("Courier", 10, -1));
-
-    QPrinter printer(QPrinter::HighResolution);
-
-    QPrintDialog *dialog = new QPrintDialog(&printer, this);
-    dialog->setWindowTitle("Print");
-    if (dialog->exec() == QDialog::Accepted) {
-        document.print(&printer);
-    }
 }
 
 // Edit menu items
@@ -446,16 +377,6 @@ void MainWindow::on_actionEdit_Copy_triggered()
 void MainWindow::on_actionEdit_Paste_triggered()
 {
     tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->paste();
-}
-
-void MainWindow::on_actionEdit_Find_All_triggered()
-{
-    tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->findAll();
-}
-
-void MainWindow::on_actionEdit_Find_triggered()
-{
-    findDialog->show();
 }
 
 void MainWindow::on_actionView_Line_Wrap_triggered()
@@ -498,19 +419,9 @@ void MainWindow::on_actionTools_Announce_Document_triggered()
  //   }
 }
 
-void MainWindow::on_actionHelp_How_to_Collaborate_triggered()
-{
-    helpDialog->show();
-}
-
 void MainWindow::on_actionHelp_About_KGPEdit_triggered()
 {
     aboutDialog->exec();
-}
-
-void MainWindow::on_actionHelp_About_Qt_triggered()
-{
-    QDesktopServices::openUrl(QUrl("http://www.qtsoftware.com/"));
 }
 
 void MainWindow::on_actionTools_Connect_to_Document_triggered()
@@ -616,31 +527,6 @@ void MainWindow::tabCloseClicked(int index)
         tabWidgetToDocumentMap.remove(ui->tabWidget->widget(index));
         ui->tabWidget->removeTab(index);
     }
-}
-
-void MainWindow::findNextTriggered(QString str, Qt::CaseSensitivity sensitivity, bool wrapAround, Enu::FindMode mode)
-{
-    tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->findNext(str, sensitivity, wrapAround, mode);
-}
-
-void MainWindow::findPrevTriggered(QString str, Qt::CaseSensitivity sensitivity, bool wrapAround, Enu::FindMode mode)
-{
-    tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->findPrev(str, sensitivity, wrapAround, mode);
-}
-
-void MainWindow::replaceAllTriggered(QString find, QString replace, Qt::CaseSensitivity sensitivity, Enu::FindMode mode)
-{
-    tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->replaceAll(find, replace, sensitivity, mode);
-}
-
-void MainWindow::replaceTriggered(QString replace)
-{
-    tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->replace(replace);
-}
-
-void MainWindow::findReplaceTriggered(QString find, QString replace, Qt::CaseSensitivity sensitivity, bool wrapAround, Enu::FindMode mode)
-{
-    tabWidgetToDocumentMap.value(ui->tabWidget->currentWidget())->findReplace(find, replace, sensitivity, wrapAround, mode);
 }
 
 void MainWindow::connectToDocument(QStringList list)

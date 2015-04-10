@@ -4,8 +4,6 @@
 #include <QtWidgets/QMainWindow>
 #include "document.h"
 #include "connecttodocument.h"
-#include "finddialog.h"
-#include "findtoolbar.h"
 #include "announcedocumentdialog.h"
 #include "aboutdialog.h"
 #include "firstrundialog.h"
@@ -33,7 +31,6 @@ private:
     QString openPath;
     ConnectToDocument *connectDialog;
     AnnounceDocumentDialog *announceDocumentDialog;
-    FindDialog *findDialog;
     PreferencesDialog *preferencesDialog;
     AboutDialog *aboutDialog;
     FirstRunDialog *firstRunDialog;
@@ -61,19 +58,13 @@ private slots:
     void on_actionFile_Open_triggered();
     bool on_actionFile_Save_triggered();
     bool on_actionFile_Save_As_triggered();
-    bool on_actionFile_Save_A_Copy_As_triggered();
-    bool on_actionFile_Save_All_triggered();
-
     void on_actionFile_Close_triggered();
-    void on_actionFile_Print_triggered();
 
     void on_actionEdit_Undo_triggered();
     void on_actionEdit_Redo_triggered();
     void on_actionEdit_Cut_triggered();
     void on_actionEdit_Copy_triggered();
     void on_actionEdit_Paste_triggered();
-    void on_actionEdit_Find_All_triggered();
-    void on_actionEdit_Find_triggered();
 
     void on_actionView_Line_Wrap_triggered();
     void on_actionView_Hide_Show_Participants_triggered();
@@ -90,21 +81,13 @@ private slots:
     void on_actionWindow_Next_Document_triggered();
     void on_actionWindow_Previous_Document_triggered();
 
-    void on_actionHelp_How_to_Collaborate_triggered();
     void on_actionHelp_About_KGPEdit_triggered();
-    void on_actionHelp_About_Qt_triggered();
 
     void setUndoability(bool b);
     void setRedoability(bool b);
 
     void documentChanged(int index);
     void tabCloseClicked(int index);
-
-    void findNextTriggered(QString str, Qt::CaseSensitivity, bool wrapAround, Enu::FindMode mode);
-    void findPrevTriggered(QString str, Qt::CaseSensitivity, bool wrapAround, Enu::FindMode mode);
-    void replaceAllTriggered(QString find, QString replace, Qt::CaseSensitivity sensitivity, Enu::FindMode mode);
-    void replaceTriggered(QString replace);
-    void findReplaceTriggered(QString find, QString replace, Qt::CaseSensitivity sensitivity, bool wrapAround, Enu::FindMode mode);
 
     void connectToDocument(QStringList list);
     void announceDocument(QString ownerName, Qt::CheckState broadcastCheckState, Qt::CheckState alwaysUserNameCheckState);

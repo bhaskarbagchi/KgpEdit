@@ -9,11 +9,6 @@ namespace Enu
         GET, JOIN, LEAVE,
     };
 
-   enum FindMode
-   {
-       Contains, StartsWith, EntireWord,
-   };
-
    enum Permissions {
        ReadWrite = 2,
        ReadOnly = 1,

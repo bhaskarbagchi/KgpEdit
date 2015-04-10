@@ -17,13 +17,11 @@ SOURCES += main.cpp \
     mainwindow.cpp \
     document.cpp \
     connecttodocument.cpp \
-    finddialog.cpp \
     preferencesdialog.cpp \
     codeeditor.cpp \
     participantspane.cpp \
     chatpane.cpp \
     client.cpp \
-    findtoolbar.cpp \
     server.cpp \
     chatbrowser.cpp \
     utilities.cpp \
@@ -34,13 +32,11 @@ SOURCES += main.cpp \
 HEADERS += mainwindow.h \
     document.h \
     connecttodocument.h \
-    finddialog.h \
     preferencesdialog.h \
     codeeditor.h \
     participantspane.h \
     chatpane.h \
     client.h \
-    findtoolbar.h \
     enu.h \
     server.h \
     chatbrowser.h \
@@ -52,11 +48,9 @@ HEADERS += mainwindow.h \
 FORMS += mainwindow.ui \
     document.ui \
     connecttodocument.ui \
-    finddialog.ui \
     preferencesdialog.ui \
     participantspane.ui \
     chatpane.ui \
-    findtoolbar.ui \
     announcedocumentdialog.ui \
     firstrundialog.ui \
     aboutdialog.ui \
