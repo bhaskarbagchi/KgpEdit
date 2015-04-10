@@ -85,12 +85,11 @@ void MainWindow::readSettings()
     resize(size);
     move(pos);
 
-    if (settings.value("isNotFirstRun").toBool() != true) {
-        firstRunDialog = new FirstRunDialog(this);
-        firstRunDialog->show();
-        firstRunDialog->raise();
-        firstRunDialog->activateWindow();
-    }
+    firstRunDialog = new FirstRunDialog(this);
+    firstRunDialog->show();
+    firstRunDialog->raise();
+    firstRunDialog->activateWindow();
+
     myName = settings.value("name", "Owner").toString();
 }
 
@@ -100,7 +99,6 @@ void MainWindow::writeSettings()
     settings.setValue("pos", pos());
     settings.setValue("size", size());
     settings.setValue("name", preferencesDialog->getMyName());
-    settings.setValue("isNotFirstRun", true);
 }
 
 // Protected closeEvent
