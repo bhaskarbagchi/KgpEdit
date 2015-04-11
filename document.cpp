@@ -86,9 +86,9 @@ void Document::announceDocument()
             ipAddress = ipAddressesList.at(i).toString();
     }
     // if we did not find one, use IPv4 localhost
-    //if (ipAddress.isEmpty()) {
+    if (ipAddress.isEmpty()) {
         ipAddress = QHostAddress(QHostAddress::LocalHost).toString();
-    //}
+    }
     //chatPane->appendChatMessage("Listening at " + ipAddress + ":" + port);
 
     participantPane->setConnectInfo(ipAddress, port);
